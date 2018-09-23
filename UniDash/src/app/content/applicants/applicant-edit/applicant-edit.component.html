@@ -1,0 +1,127 @@
+<app-applicant-filter *ngIf="filterShown" [spec]="specialityList"></app-applicant-filter>
+<simple-notifications></simple-notifications>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Редагування</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="col-md-4">
+                    <div class="col-md-12">
+                        <div class="col-md-3" style="border-right: 2px dotted #34495E">
+                            <a class="btn fa-ico-style" data-toggle="tooltip" data-placement="bottom" (click)="addApplicant()" title="Додати"><i class="fas fa-plus"></i></a>
+                            <a class="btn fa-ico-style" data-toggle="tooltip" data-placement="bottom" (click)="removeApplicant()" title="Видалити"><i class="fas fa-minus"></i></a>
+                        </div>
+                        <a href="#" class="btn fa-ico-style" data-toggle="tooltip" data-placement="bottom" title="Експорт"><i class="far fa-file-excel"></i></a>
+                        <a id="btn-search" (click)="filterShown = !filterShown" class="btn fa-ico-style" data-toggle="tooltip" data-placement="bottom" title="Пошук"><i class="fas fa-search"></i></a>
+                    </div>
+                    <!---->
+                    <div class="col-md-12">
+                        <span class="list-applicant-info"></span>
+                        <mat-selection-list #list (selectionChange)="onNgModelChange($event)">
+                            <mat-list-option *ngFor="let item of applicantsList" [selected]="item.selected" [value]="item"  (click)="selectApplicant(item, $event)" [disabled]="!applicantForm.pristine || newApplicantMode" color='primary'>
+                                {{item.ApplicantId}} - {{item.ApplicantName}}
+                            </mat-list-option>
+                        </mat-selection-list>
+                    </div>
+                </div>
+                <form [formGroup]="applicantForm" (ngSubmit)="saveApplicant()">
+                    <div class="col-md-8" id="form_zero">
+                    <div class="x_panel">
+                        <div class="x_title">Персональні дані</div>
+                        <div class="x_content">
+                        <div class="form-row">
+                            <div class="col">
+                                <mat-form-field class="w-100">
+                                <input matInput placeholder="Ідентифікатор" formControlName="ApplicantId">
+                                </mat-form-field>
+                                <mat-form-field class="w-100">
+                                <input matInput placeholder="Прізвище, ім'я, по-батькові" formControlName="ApplicantName">
+                                </mat-form-field>
+                                <mat-form-field class="w-100">
+                                <span matPrefix>+380 &nbsp;</span>
+                                <input matInput placeholder="Телефон" formControlName="ApplicantPhone">
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Назва закладу" formControlName="SchoolCollege">
+                                </mat-form-field>
+                                <mat-form-field class="w-100">
+                                    <mat-label>Адреса</mat-label>
+                                    <input matInput placeholder="Місто, вулиця, тощо..." formControlName="Address">
+                                </mat-form-field>
+                                <mat-form-field class="w-100">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput placeholder="exaple@gmail.com" formControlName="ApplicantMail">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="x_panel">
+                        <div class="x_title">Побажання</div>
+                        <div class="x_content">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <mat-form-field class="w-100">
+                                        <mat-select placeholder="Спеціальності..." formControlName="Speciality" multiple #speciality >
+                                            <mat-select-trigger>
+                                                {{speciality.selected ? speciality?.selected[0]?.viewValue : '' }}
+                                                <span *ngIf="speciality.selected?.length > 1" class="example-additional-selection">
+                                                    (+{{speciality.selected.length - 1}} {{speciality.selected?.length === 2 ? 'інша спец.' : 'інші спец.'}})
+                                                </span>
+                                                </mat-select-trigger>
+                                            <mat-option *ngFor="let spec of specialityList" [value]="spec.id">{{spec.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <mat-form-field style="width: 100%">
+                                        <textarea matInput placeholder="Помітки" formControlName="Mark"></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="x_panel">
+                        <div class="x_title">Додаткова інформація</div>
+                        <div class="x_content">
+                            <div class="col-md-8 form-horizontal">
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Знайшов" formControlName="NameFound">
+                                </mat-form-field>
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Додав" formControlName="NameAdded">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4 form-horizontal">
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Дата створення" formControlName="DateEdit">
+                                </mat-form-field>
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Дата редагування" formControlName="DateAdd">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-2  float-right" *ngIf="!applicantForm.pristine || newApplicantMode">
+                        <button class="w-100" mat-raised-button color="primary" [disabled]="!applicantForm.valid">Зберегти</button>
+                    </div>
+                    <div class="col-md-2 col-md-offset-8 float-right" *ngIf="!applicantForm.pristine || newApplicantMode">
+                        <button class="w-100" mat-raised-button>Відміна</button>
+                    </div>
+                    </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
