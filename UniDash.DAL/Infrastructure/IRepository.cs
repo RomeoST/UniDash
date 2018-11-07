@@ -13,6 +13,7 @@ namespace UniDash.DAL.Infrastructure
         void Update(T entity);
         void Delete(T entity);
         void Delete(Expression<Func<T, bool>> where);
+        T GetById(int id);
         T GetById(long id);
         T GetById(string id);
         T Get(Expression<Func<T, bool>> where);

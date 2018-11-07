@@ -23,14 +23,14 @@ namespace UniDash.DAL.Repositories
         /// Збереження всіх даних які відбувалися з БД
         /// </summary>
         /// <returns></returns>
-        public async Task CommitAsync()
+        public async Task<int> CommitAsync()
         {
-            await dataContext.SaveChangesAsync();
+            return await DataContext.SaveChangesAsync();
         }
 
-        public void Commit()
+        public int Commit()
         {
-            dataContext.SaveChanges();
+            return DataContext.SaveChanges();
         }
     }
 }

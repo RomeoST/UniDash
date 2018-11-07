@@ -45,6 +45,11 @@ namespace UniDash.DAL.Infrastructure
                 dbSet.Remove(o);
         }
 
+        public virtual T GetById(int id)
+        {
+            return dbSet.Find(id);
+        }
+
         public virtual T GetById(long id)
         {
             return dbSet.Find(id);
@@ -77,12 +82,12 @@ namespace UniDash.DAL.Infrastructure
 
         public virtual T Get(Expression<Func<T, bool>> where)
         {
-            return dbSet.Where(where).FirstOrDefault();
+            return dbSet.Find(where);
         }
 
         public virtual async Task<T> GetAsync(Expression<Func<T, bool>> where)
         {
-            return await dbSet.Where(where).FirstOrDefaultAsync();
+            return await dbSet.FindAsync(where);
         }
     }
 }

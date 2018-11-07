@@ -12,9 +12,14 @@ namespace UniDash.Model.Models
     {
         [ForeignKey("DutUser")]
         public int UserId { get; set; }
-
+        [ForeignKey("Institute")]
         public int InstituteId { get; set; }
+        public Institute Institute { get; set; }
+        [ForeignKey("Faculty")]
         public int FacultyId { get; set; }
+        public Faculty Faculty { get; set; }
+        [ForeignKey("Department")]
         public int DepartmentId { get; set; }
+        public Department Department { get; set; }
     }
 }

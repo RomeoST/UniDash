@@ -10,6 +10,7 @@ namespace UniDash.Model.Models
 {
     public class TAction
     {
+        [Key]
         public int ActionId { get; set; }
         [ForeignKey("Controller")]
         public int? ControllerId { get; set; }

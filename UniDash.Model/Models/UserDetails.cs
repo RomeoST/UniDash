@@ -20,7 +20,7 @@ namespace UniDash.Model.Models
         public DateTime LastVisitDate { get; set; }
 
         public virtual DutUser DutUser { get; set; }
-        public virtual UserPosition UserPosition { get; set; }
+        //public virtual UserPosition UserPosition { get; set; }
 
         public UserDetails() => CreateDate = DateTime.Now;
 

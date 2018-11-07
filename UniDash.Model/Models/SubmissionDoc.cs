@@ -14,7 +14,6 @@ namespace UniDash.Model.Models
     public class SubmissionDoc
     {
         public int Id { get; set; }
-        [StringLength(128)]
         [ForeignKey("DutUser")]
         public string UserId { get; set; }
         public string FullName { get; set; }

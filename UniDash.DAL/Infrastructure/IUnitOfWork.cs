@@ -4,7 +4,7 @@ namespace UniDash.DAL.Infrastructure
 {
     public interface IUnitOfWork
     {
-        void Commit();
-        Task CommitAsync();
+        int Commit();
+        Task<int> CommitAsync();
     }
 }

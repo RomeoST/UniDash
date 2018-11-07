@@ -14,7 +14,7 @@ namespace UniDash.Model.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<Department> Departments { get; set; }
+        public virtual List<Department> Departments { get; set; }
         public Institute() => Departments = new List<Department>();
     }
 }

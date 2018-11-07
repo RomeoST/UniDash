@@ -2,15 +2,15 @@
 {
     public class OperationDetails
     {
-        public OperationDetails(bool successed, string message, string prop)
+        public OperationDetails(bool success, string message, object obj = null)
         {
-            Successed = successed;
+            Success = success;
             Message = message;
-            Property = prop;
+            Object = obj;
         }
 
-        public bool Successed { get; }
+        public bool Success { get; }
         public string Message { get; }
-        public  string Property { get; }
+        public object Object { get; set; }
     }
 }

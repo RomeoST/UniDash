@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using UniDash.DAL.Infrastructure;
 using UniDash.DAL.Repositories;
 using Ninject.Web.Common;
+using UniDash.BLL.Interfaces;
+using UniDash.BLL.Services;
 using UniDash.DAL.EF;
 using UniDash.Model.Models;
+using UniDash.Model.Models.StructUniversity;
 
 namespace UniDash.BLL.Infrastructure
 {
@@ -12,10 +16,16 @@ namespace UniDash.BLL.Infrastructure
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services, string connectionString)
         {
-            services.AddTransient<IDataBaseFactory, DataBaseFactory>(provider => new DataBaseFactory(connectionString));
+            services.AddDbContext<DutContext>(p => p.UseSqlServer(connectionString));
+            services.AddScoped<IDataBaseFactory, DataBaseFactory>(provider => new DataBaseFactory(connectionString));
             services.AddTransient<IUnitOfWork, IdentityUnitWork>();
 
-            services.AddIdentity<DutUser, DutRole>()
+            services.AddIdentity<DutUser, DutRole>(p =>
+                {
+                    p.Password.RequireUppercase = false;
+                    p.Password.RequireLowercase = false;
+                    p.Password.RequireNonAlphanumeric = false;
+                })
                 .AddEntityFrameworkStores<DutContext>()
                 .AddDefaultTokenProviders();
 
@@ -23,7 +33,14 @@ namespace UniDash.BLL.Infrastructure
             services.AddTransient<IPermissionRepository, PermissionRepository>();
             services.AddTransient<IApplicantRepository, ApplicantRepository>();
             services.AddTransient<ISubmissionRepository, SubmissionRepository>();
-            //services.AddTransient<IUStructureRepository<>, UStructureRepository<>>()
+
+            services.AddTransient<IUStructureRepository<Faculty>, UStructureRepository<Faculty>>();
+            services.AddTransient<IUStructureRepository<Institute>, UStructureRepository<Institute>>();
+            services.AddTransient<IUStructureRepository<Department>, UStructureRepository<Department>>();
+            services.AddTransient<IUStructureRepository<Specialty>, UStructureRepository<Specialty>>();
+
+            services.AddTransient<IApplicantService, ApplicantService>();
+            services.AddTransient<IUserService, UserService>();
 
             return services;
         }

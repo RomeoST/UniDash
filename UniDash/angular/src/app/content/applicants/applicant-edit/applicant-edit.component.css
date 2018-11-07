@@ -1,0 +1,25 @@
+.mat-selection-list{
+    height: 600px;
+    overflow: auto;
+}
+
+.mat-list-item-focus{
+    border-left: 1px solid rgba(0,0,0,.26);
+}
+
+.mat-selection-list::-webkit-scrollbar{
+    width: 4px;
+    height: 4px;
+}
+
+.mat-selection-list::-webkit-scrollbar-thumb{
+    background-color: rgba(0,0,0,.26);
+}
+
+.mat-pseudo-checkbox-checked{
+    background-color: black;
+}
+
+.mat-pseudo-checkbox{
+    background-color: black;
+}

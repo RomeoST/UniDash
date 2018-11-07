@@ -26,7 +26,5 @@ namespace UniDash.Model.Models
         [ForeignKey("Institute")]
         public int? InstituteId { get; set; }
         public virtual Institute Institute { get; set; }
-
-        public bool? isAdmission { get; set; }
     }
 }

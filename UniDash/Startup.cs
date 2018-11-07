@@ -26,6 +26,7 @@ namespace UniDash
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.RegisterServices(Configuration.GetConnectionString("DutConnection"));
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
@@ -39,6 +40,11 @@ namespace UniDash
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             app.Use(async (context, next) => {
                 await next();
                 if (context.Response.StatusCode == 404 &&
@@ -50,18 +56,19 @@ namespace UniDash
                 }
             });
 
-            app.UseMvcWithDefaultRoute();
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
 
+            app.UseAuthentication();
             // 2 methods for working angular
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            app.UseAuthentication();
-
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

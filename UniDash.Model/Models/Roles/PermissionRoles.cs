@@ -10,6 +10,7 @@ namespace UniDash.Model.Models
 {
     public class PermissionRoles
     {
+        [Key]
         public int PermissionId { get; set; }
         [ForeignKey("DutRole")]
         public string RoleId { get; set; }

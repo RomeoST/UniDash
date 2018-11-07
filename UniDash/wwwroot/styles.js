@@ -703,11 +703,11 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\agent\OneDrive\Документы\Visual Studio 2017\Projects\Asp core\UniDash\UniDash\node_modules\bootstrap\dist\css\bootstrap.css */"./node_modules/bootstrap/dist/css/bootstrap.css");
-__webpack_require__(/*! C:\Users\agent\OneDrive\Документы\Visual Studio 2017\Projects\Asp core\UniDash\UniDash\node_modules\animate.css\animate.css */"./node_modules/animate.css/animate.css");
-__webpack_require__(/*! C:\Users\agent\OneDrive\Документы\Visual Studio 2017\Projects\Asp core\UniDash\UniDash\src\assets\css\custom.css */"./src/assets/css/custom.css");
-__webpack_require__(/*! C:\Users\agent\OneDrive\Документы\Visual Studio 2017\Projects\Asp core\UniDash\UniDash\src\assets\css\styles.css */"./src/assets/css/styles.css");
-module.exports = __webpack_require__(/*! C:\Users\agent\OneDrive\Документы\Visual Studio 2017\Projects\Asp core\UniDash\UniDash\src\assets\css\uniDashTheme.css */"./src/assets/css/uniDashTheme.css");
+__webpack_require__(/*! C:\Users\agent\source\repos\Asp core\UniDash\UniDash\angular\node_modules\bootstrap\dist\css\bootstrap.css */"./node_modules/bootstrap/dist/css/bootstrap.css");
+__webpack_require__(/*! C:\Users\agent\source\repos\Asp core\UniDash\UniDash\angular\node_modules\animate.css\animate.css */"./node_modules/animate.css/animate.css");
+__webpack_require__(/*! C:\Users\agent\source\repos\Asp core\UniDash\UniDash\angular\src\assets\css\custom.css */"./src/assets/css/custom.css");
+__webpack_require__(/*! C:\Users\agent\source\repos\Asp core\UniDash\UniDash\angular\src\assets\css\styles.css */"./src/assets/css/styles.css");
+module.exports = __webpack_require__(/*! C:\Users\agent\source\repos\Asp core\UniDash\UniDash\angular\src\assets\css\uniDashTheme.css */"./src/assets/css/uniDashTheme.css");
 
 
 /***/ })

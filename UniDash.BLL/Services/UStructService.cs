@@ -17,6 +17,7 @@ namespace UniDash.BLL.Services
         [Inject] public IUStructureRepository<Institute> instituteRepository { get; set; }
         [Inject] public IUStructureRepository<Faculty> facultyRepository { get; set; }
         [Inject] public IUStructureRepository<Department> departmentRepository { get; set; }
+        [Inject] public IUStructureRepository<Specialty> specialtyRepository { get; set; }
 
         /// <summary>
         /// Створення нової структури університету
@@ -150,9 +151,9 @@ namespace UniDash.BLL.Services
             }
         }
 
-        public async Task<IEnumerable<Department>> GetAdmissionDepartments()
+        public async Task<IEnumerable<Specialty>> GetSpecialty()
         {
-            return await departmentRepository.GetManyAsync(p => p.isAdmission == true);
+            return await specialtyRepository.GetAllAsync();
         }
 
         public async Task SaveStructure()

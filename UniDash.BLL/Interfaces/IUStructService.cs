@@ -16,7 +16,7 @@ namespace UniDash.BLL.Interfaces
         Task<UStructBase> GetById(int id, TypeStructUniversity type);
         Task<IEnumerable<UStructBase>> GetAll(TypeStructUniversity type);
 
-        Task<IEnumerable<Department>> GetAdmissionDepartments();
+        Task<IEnumerable<Specialty>> GetSpecialty();
 
         Task SaveStructure();
     }

@@ -5473,7 +5473,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\agent\OneDrive\Документы\Visual Studio 2017\Projects\Asp core\UniDash\UniDash\src\polyfills.ts */"./src/polyfills.ts");
+module.exports = __webpack_require__(/*! C:\Users\agent\source\repos\Asp core\UniDash\UniDash\angular\src\polyfills.ts */"./src/polyfills.ts");
 
 
 /***/ })

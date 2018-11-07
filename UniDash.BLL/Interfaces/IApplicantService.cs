@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UniDash.BLL.Infrastructure;
 using UniDash.Model.Models;
+using UniDash.Model.Models.StructUniversity;
 
 namespace UniDash.BLL.Interfaces
 {
@@ -16,8 +17,11 @@ namespace UniDash.BLL.Interfaces
         Task<OperationDetails> DeleteApplicant(Applicant app);
 
         Applicant GetApplicantById(int id);
-        Task<IEnumerable<Applicant>> GetApplicants();
+        IEnumerable<Applicant> GetApplicants();
+        Task<IEnumerable<Applicant>> GetApplicantsAsync();
 
-        Task SaveApplicant();
+        IEnumerable<Specialty> GetSpecialties();
+
+        Task<int> SaveApplicant();
     }
 }

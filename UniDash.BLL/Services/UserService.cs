@@ -14,27 +14,37 @@ namespace UniDash.BLL.Services
 {
     public class UserService : IUserService
     {
-        public IUnitOfWork DataBase { get; set; }
-        public IUserDetailsRepository UserDetailsRepository { get; set; }
-        public IPermissionRepository PermissionRepository { get; set; }
-        public UserManager<DutUser> UserManager { get; set; }
-        public RoleManager<DutRole> RoleManager { get; set; }
+        private IUnitOfWork _dataBase { get;}
+        private IUserDetailsRepository _userDetailsRepository { get;}
+        private IPermissionRepository _permissionRepository { get;}
+        private UserManager<DutUser> _userManager { get;}
+        private RoleManager<DutRole> _roleManager { get;}
+
+        public UserService(IUnitOfWork dataBase, IUserDetailsRepository userDetailsRepository,
+            IPermissionRepository permissionRepository, UserManager<DutUser> userManager, RoleManager<DutRole> roleManager)
+        {
+            _dataBase = dataBase;
+            _userDetailsRepository = userDetailsRepository;
+            _permissionRepository = permissionRepository;
+            _userManager = userManager;
+            _roleManager = roleManager;
+        }
 
         public async Task<OperationDetails> Create(DutUser userDto, string password)
         {
-            var user = await UserManager.FindByEmailAsync(userDto.Email);
+            var user = await _userManager.FindByEmailAsync(userDto.Email);
             if (user != null) return new OperationDetails(false, "Користувач з таким email вже існує", "Email");
 
-            var result = await UserManager.CreateAsync(userDto, password);
+            var result = await _userManager.CreateAsync(userDto, password);
             if (result.Errors.Any())
                 return new OperationDetails(false, result.Errors.FirstOrDefault().Description, "");
 
             // Добавить роль
-            await UserManager.AddToRoleAsync(userDto, "user");
+            await _userManager.AddToRoleAsync(userDto, "user");
 
             // Создание профиля клиента
             UserDetails userDetails = new UserDetails {Id = userDto.Id, FullName = userDto.UserDetails.FullName};
-            UserDetailsRepository.Add(userDetails);
+            _userDetailsRepository.Add(userDetails);
             await SaveUser();
 
             return new OperationDetails(true, "Реєстрація успішно пройдена","");
@@ -43,7 +53,7 @@ namespace UniDash.BLL.Services
 
         public ClaimsIdentity Authenticate(string login, string password)
         {
-            var user = UserManager.Users.SingleOrDefault(p => p.UserName == login);
+            var user = _userManager.Users.SingleOrDefault(p => p.UserName == login);
 
             if (user == null)
                 return null;
@@ -61,14 +71,14 @@ namespace UniDash.BLL.Services
 
         public async Task<DutUser> FindByName(string name)
         {
-            var user = await UserManager.FindByNameAsync(name);
+            var user = await _userManager.FindByNameAsync(name);
 
             return user;
         }
 
         public async Task<IEnumerable<UserDetails>> GetAll()
         {
-            return await UserDetailsRepository.GetAllAsync();
+            return await _userDetailsRepository.GetAllAsync();
         }
 
         // Инициализация БД  (начальная)
@@ -76,11 +86,11 @@ namespace UniDash.BLL.Services
         {
             foreach (var roleName in roles)
             {
-                var role = await RoleManager.FindByNameAsync(roleName);
+                var role = await _roleManager.FindByNameAsync(roleName);
                 if (role != null) continue;
 
                 role = new DutRole() {Name = roleName};
-                await RoleManager.CreateAsync(role);
+                await _roleManager.CreateAsync(role);
             }
         }
 
@@ -95,13 +105,13 @@ namespace UniDash.BLL.Services
             try
             {
                 var required = requiredPermission.Split('-');
-                var roles = await PermissionRepository.GetPermissionRoles(required[0], required[1]);
+                var roles = await _permissionRepository.GetPermissionRoles(required[0], required[1]);
 
-                var user = await UserManager.FindByNameAsync(userName);
+                var user = await _userManager.FindByNameAsync(userName);
                 if (user == null)
                     return false;
 
-                return roles.Select(p => UserManager.IsInRoleAsync(user, p.Name)).Any();
+                return roles.Select(p => _userManager.IsInRoleAsync(user, p.Name)).Any();
             }
             catch (Exception e)
             {
@@ -111,7 +121,7 @@ namespace UniDash.BLL.Services
 
         public async Task<OperationDetails> EditProfile(DutUser user)
         {
-            var curus = await UserManager.FindByIdAsync(user.Id);
+            var curus = await _userManager.FindByIdAsync(user.Id);
             if(curus == null)
                 return new OperationDetails(false, "Користувач не знайдений","");
             curus.UserDetails.FullName = user.UserDetails.FullName;
@@ -124,7 +134,7 @@ namespace UniDash.BLL.Services
 
         public async Task SaveUser()
         {
-            await DataBase.CommitAsync();
+            await _dataBase.CommitAsync();
         }
 
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

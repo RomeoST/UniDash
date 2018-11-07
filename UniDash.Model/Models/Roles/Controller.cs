@@ -9,6 +9,7 @@ namespace UniDash.Model.Models
 {
     public class TController
     {
+        [Key]
         public int ControllerId { get; set; }
 
         public string Name { get; set; }

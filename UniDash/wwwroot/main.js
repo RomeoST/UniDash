@@ -52,7 +52,7 @@ var AppRoutingModule = /** @class */ (function () {
     }
     AppRoutingModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes, { enableTracing: true })],
+            imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes)],
             exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
         })
     ], AppRoutingModule);
@@ -96,10 +96,8 @@ module.exports = "<div class=\"container-fluid body\">\r\n    <div class=\"main_
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var angular2_notifications__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! angular2-notifications */ "./node_modules/angular2-notifications/angular2-notifications.umd.js");
-/* harmony import */ var angular2_notifications__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(angular2_notifications__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var angular2_notifications__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! angular2-notifications */ "./node_modules/angular2-notifications/angular2-notifications.umd.js");
+/* harmony import */ var angular2_notifications__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(angular2_notifications__WEBPACK_IMPORTED_MODULE_1__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -111,44 +109,23 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-// rx
-
-
 var AppComponent = /** @class */ (function () {
-    function AppComponent(http, _notifications) {
-        this.http = http;
+    function AppComponent(
+    //private http : Http, 
+    _notifications) {
         this._notifications = _notifications;
     }
     AppComponent.prototype.ngOnInit = function () {
-        var test = this.http.get('api/home').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); })).subscribe(function (res) { return console.log(res); });
+        /*let test = this.http.get('api/applicant/list').pipe(
+          map(res => res.json())).subscribe(res => console.log(res));*/
     };
-    AppComponent.prototype.extractData = function (response) {
-        var test = response.json().data;
-        return '';
-    };
-    AppComponent.prototype.not = function () {
-        var t = {
-            timeOut: 5000,
-            showProgressBar: true,
-            pauseOnHover: true,
-            clickToClose: true,
-            animate: 'fromRight'
-        };
-        this._notifications.create("Диплом", "Проклят", "success", t);
-        this._notifications.success(this.example);
-    };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('example'),
-        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["TemplateRef"])
-    ], AppComponent.prototype, "example", void 0);
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"],
-            angular2_notifications__WEBPACK_IMPORTED_MODULE_3__["NotificationsService"]])
+        __metadata("design:paramtypes", [angular2_notifications__WEBPACK_IMPORTED_MODULE_1__["NotificationsService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -171,16 +148,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _left_menu_left_menu_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./left-menu/left-menu.component */ "./src/app/left-menu/left-menu.component.ts");
+/* harmony import */ var _menu_left_menu_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./menu/left-menu.component */ "./src/app/menu/left-menu.component.ts");
 /* harmony import */ var _top_menu_top_menu_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./top-menu/top-menu.component */ "./src/app/top-menu/top-menu.component.ts");
-/* harmony import */ var _right_content_right_content_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./right-content/right-content.component */ "./src/app/right-content/right-content.component.ts");
-/* harmony import */ var _left_menu_list_menu_list_menu_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./left-menu/list-menu/list-menu.component */ "./src/app/left-menu/list-menu/list-menu.component.ts");
-/* harmony import */ var _left_menu_footer_menu_footer_menu_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./left-menu/footer-menu/footer-menu.component */ "./src/app/left-menu/footer-menu/footer-menu.component.ts");
-/* harmony import */ var _right_content_news_news_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./right-content/news/news.component */ "./src/app/right-content/news/news.component.ts");
-/* harmony import */ var _right_content_applicants_applicants_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./right-content/applicants/applicants.module */ "./src/app/right-content/applicants/applicants.module.ts");
+/* harmony import */ var _content_right_content_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./content/right-content.component */ "./src/app/content/right-content.component.ts");
+/* harmony import */ var _menu_list_menu_list_menu_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./menu/list-menu/list-menu.component */ "./src/app/menu/list-menu/list-menu.component.ts");
+/* harmony import */ var _menu_footer_menu_footer_menu_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./menu/footer-menu/footer-menu.component */ "./src/app/menu/footer-menu/footer-menu.component.ts");
+/* harmony import */ var _content_news_news_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./content/news/news.component */ "./src/app/content/news/news.component.ts");
+/* harmony import */ var _content_applicants_applicants_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./content/applicants/applicants.module */ "./src/app/content/applicants/applicants.module.ts");
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _shared_global_shared_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./shared/global-shared.module */ "./src/app/shared/global-shared.module.ts");
-/* harmony import */ var _right_content_news_news_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./right-content/news/news.module */ "./src/app/right-content/news/news.module.ts");
+/* harmony import */ var _content_news_news_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./content/news/news.module */ "./src/app/content/news/news.module.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -208,19 +185,19 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
-                _left_menu_left_menu_component__WEBPACK_IMPORTED_MODULE_4__["LeftMenuComponent"],
+                _menu_left_menu_component__WEBPACK_IMPORTED_MODULE_4__["LeftMenuComponent"],
                 _top_menu_top_menu_component__WEBPACK_IMPORTED_MODULE_5__["TopMenuComponent"],
-                _right_content_right_content_component__WEBPACK_IMPORTED_MODULE_6__["RightContentComponent"],
-                _left_menu_list_menu_list_menu_component__WEBPACK_IMPORTED_MODULE_7__["ListMenuComponent"],
-                _left_menu_footer_menu_footer_menu_component__WEBPACK_IMPORTED_MODULE_8__["FooterMenuComponent"],
-                _right_content_news_news_component__WEBPACK_IMPORTED_MODULE_9__["NewsComponent"],
+                _content_right_content_component__WEBPACK_IMPORTED_MODULE_6__["RightContentComponent"],
+                _menu_list_menu_list_menu_component__WEBPACK_IMPORTED_MODULE_7__["ListMenuComponent"],
+                _menu_footer_menu_footer_menu_component__WEBPACK_IMPORTED_MODULE_8__["FooterMenuComponent"],
+                _content_news_news_component__WEBPACK_IMPORTED_MODULE_9__["NewsComponent"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__["BrowserAnimationsModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_11__["AppRoutingModule"],
-                _right_content_applicants_applicants_module__WEBPACK_IMPORTED_MODULE_10__["ApplicantsModule"],
-                _right_content_news_news_module__WEBPACK_IMPORTED_MODULE_13__["NewsModule"],
+                _content_applicants_applicants_module__WEBPACK_IMPORTED_MODULE_10__["ApplicantsModule"],
+                _content_news_news_module__WEBPACK_IMPORTED_MODULE_13__["NewsModule"],
                 _shared_global_shared_module__WEBPACK_IMPORTED_MODULE_12__["GlobalSharedModule"]
             ],
             providers: [],
@@ -234,199 +211,10 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/left-menu/footer-menu/footer-menu.component.css":
-/*!*****************************************************************!*\
-  !*** ./src/app/left-menu/footer-menu/footer-menu.component.css ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/left-menu/footer-menu/footer-menu.component.html":
-/*!******************************************************************!*\
-  !*** ./src/app/left-menu/footer-menu/footer-menu.component.html ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<!-- /menu footer buttons -->\n<div class=\"sidebar-footer hidden-small\">\n  <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Налаштування\">\n    <i class=\"fas fa-cog\"></i>\n  </a>\n  <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"FullScreen\">\n    <i class=\"fas fa-arrows-alt\"></i>\n  </a>\n  <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Lock\">\n    <i class=\"fas fa-eye-slash\"></i>\n  </a>\n  <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Вихід\" href=\"/\">\n    <i class=\"fas fa-power-off\"></i>\n  </a>\n</div>\n<!-- /menu footer buttons -->"
-
-/***/ }),
-
-/***/ "./src/app/left-menu/footer-menu/footer-menu.component.ts":
-/*!****************************************************************!*\
-  !*** ./src/app/left-menu/footer-menu/footer-menu.component.ts ***!
-  \****************************************************************/
-/*! exports provided: FooterMenuComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FooterMenuComponent", function() { return FooterMenuComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var FooterMenuComponent = /** @class */ (function () {
-    function FooterMenuComponent() {
-    }
-    FooterMenuComponent.prototype.ngOnInit = function () {
-    };
-    FooterMenuComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-footer-menu',
-            template: __webpack_require__(/*! ./footer-menu.component.html */ "./src/app/left-menu/footer-menu/footer-menu.component.html"),
-            styles: [__webpack_require__(/*! ./footer-menu.component.css */ "./src/app/left-menu/footer-menu/footer-menu.component.css")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], FooterMenuComponent);
-    return FooterMenuComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/left-menu/left-menu.component.css":
-/*!***************************************************!*\
-  !*** ./src/app/left-menu/left-menu.component.css ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/left-menu/left-menu.component.html":
-/*!****************************************************!*\
-  !*** ./src/app/left-menu/left-menu.component.html ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"col-md-3 left_col\">\n  <div class=\"left_col scroll-view\">\n    <div class=\"navbar nav_title\" style=\"border: 0;\">\n      <a routerLink=\"/\" class=\"site_title\"><i class=\"fab fa-dyalog\" style=\"font-size: 30px\"></i> <span class=\"ml-3\">UniDash | DUT</span></a>\n    </div>\n\n    <div class=\"clearfix\"></div>\n\n    <!-- menu profile quick info -->\n    <div class=\"profile clearfix\">\n      <div class=\"profile_pic\">\n          <img src=\"../../assets/images/user.png\" alt=\"...\" class=\"img-circle profile_img\">\n      </div>\n      <div class=\"profile_info\">\n          <span>Ласкаво просимо,</span>\n          <h2>Roman Kolesnyk</h2>\n      </div>\n      <div class=\"clearfix\"></div>\n    </div>\n    <!-- /menu profile quick info -->\n\n    <br />\n\n    <app-list-menu></app-list-menu>\n    <app-footer-menu></app-footer-menu>\n  </div>\n</div>"
-
-/***/ }),
-
-/***/ "./src/app/left-menu/left-menu.component.ts":
-/*!**************************************************!*\
-  !*** ./src/app/left-menu/left-menu.component.ts ***!
-  \**************************************************/
-/*! exports provided: LeftMenuComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LeftMenuComponent", function() { return LeftMenuComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var LeftMenuComponent = /** @class */ (function () {
-    function LeftMenuComponent() {
-    }
-    LeftMenuComponent.prototype.ngOnInit = function () {
-    };
-    LeftMenuComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-left-menu',
-            template: __webpack_require__(/*! ./left-menu.component.html */ "./src/app/left-menu/left-menu.component.html"),
-            styles: [__webpack_require__(/*! ./left-menu.component.css */ "./src/app/left-menu/left-menu.component.css")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], LeftMenuComponent);
-    return LeftMenuComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/left-menu/list-menu/list-menu.component.css":
-/*!*************************************************************!*\
-  !*** ./src/app/left-menu/list-menu/list-menu.component.css ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/left-menu/list-menu/list-menu.component.html":
-/*!**************************************************************!*\
-  !*** ./src/app/left-menu/list-menu/list-menu.component.html ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = " <!-- sidebar menu -->\n <div id=\"sidebar-menu\" class=\"main_menu_side hidden-print main_menu\">\n  <div class=\"menu_section\">\n      <h3>Головне</h3>\n      <ul class=\"nav side-menu\">\n          <li><a><i class=\"fas fa-home\" style=\"font-size: 18px\"></i><span class=\"ml-3\">Головна</span> </a></li>\n          <li><a><i class=\"far fa-edit\"  style=\"font-size: 18px\"></i><span class=\"ml-3\">Абітурієнти</span><span class=\"fa fa-chevron-down fanew\"></span></a>\n              <ul class=\"nav child_menu\">\n                  <li routerLinkActive=\"current-page\"><a routerLink=\"applicants/\">Таблиця</a></li>\n                  <li routerLinkActive=\"current-page\"><a routerLink=\"applicants/edit\">Редагування</a></li>\n                  <li routerLinkActive=\"current-page\"><a href=\"form_advanced.html\">Статистика</a></li>\n              </ul>\n          </li>\n          <li>\n              <a><i class=\"fa fa-edit\" style=\"font-size: 18px\"></i><span class=\"ml-3\">Вступна компанія</span><span class=\"fa fa-chevron-down fanew\"></span></a>\n              <ul class=\"nav child_menu\">\n                  <li><a href=\"#\">Редагування</a></li>\n                  <li><a href=\"form_advanced.html\">Статистика</a></li>\n                  <li><a href=\"form_validation.html\">Експорт</a></li>\n              </ul>\n          </li>\n          <li><a href=\"#\"><i class=\"far fa-newspaper\"  style=\"font-size: 18px\"></i><span class=\"ml-3\">Електронний журнал</span> </a></li>\n          <li><a href=\"#\"><i class=\"fas fa-calendar-alt\"  style=\"font-size: 18px\"></i><span class=\"ml-3 mr-1\">Розклад</span></a></li>\n      </ul>\n  </div>\n  <div class=\"menu_section\">\n      <h3>Адміністрування</h3>\n      <ul class=\"nav side-menu\">\n          <li>\n              <a><i class=\"fas fa-users\" style=\"font-size: 18px\"></i><span class=\"ml-3\">Користувачі</span><span class=\"fa fa-chevron-down fanew\"></span></a>\n              <ul class=\"nav child_menu\">\n                  <li><a href=\"#\">Список</a></li>\n                  <li><a href=\"projects.html\">Підтвердження</a></li>\n                  <li><a href=\"#\">Доступ</a></li>\n              </ul>\n          </li>\n          <li>\n              <a><i class=\"fas fa-university\" style=\"font-size: 18px\"></i><span class=\"ml-3\">Університет</span><span class=\"fa fa-chevron-down fanew\"></span></a>\n              <ul class=\"nav child_menu\">\n                  <li><a href=\"#\">Структура університету</a></li>\n              </ul>\n          </li>\n          <li>\n              <a><i class=\"fas fa-toolbox\" style=\"font-size: 18px\"></i><span class=\"ml-3\">Система</span><span class=\"fa fa-chevron-down fanew\"></span></a>\n              <ul class=\"nav child_menu\">\n                  <li><a href=\"#\">Функції</a></li>\n                  <li><a href=\"projects.html\">Логування</a></li>\n                  <li><a href=\"projects.html\">База</a></li>\n              </ul>\n          </li>\n      </ul>\n  </div>\n\n</div>\n<!-- /sidebar menu -->\n"
-
-/***/ }),
-
-/***/ "./src/app/left-menu/list-menu/list-menu.component.ts":
-/*!************************************************************!*\
-  !*** ./src/app/left-menu/list-menu/list-menu.component.ts ***!
-  \************************************************************/
-/*! exports provided: ListMenuComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListMenuComponent", function() { return ListMenuComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ListMenuComponent = /** @class */ (function () {
-    function ListMenuComponent() {
-    }
-    ListMenuComponent.prototype.ngOnInit = function () {
-    };
-    ListMenuComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-list-menu',
-            template: __webpack_require__(/*! ./list-menu.component.html */ "./src/app/left-menu/list-menu/list-menu.component.html"),
-            styles: [__webpack_require__(/*! ./list-menu.component.css */ "./src/app/left-menu/list-menu/list-menu.component.css")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], ListMenuComponent);
-    return ListMenuComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/right-content/applicants/applicant-edit/applicant-edit.component.css":
-/*!**************************************************************************************!*\
-  !*** ./src/app/right-content/applicants/applicant-edit/applicant-edit.component.css ***!
-  \**************************************************************************************/
+/***/ "./src/app/content/applicants/applicant-edit/applicant-edit.component.css":
+/*!********************************************************************************!*\
+  !*** ./src/app/content/applicants/applicant-edit/applicant-edit.component.css ***!
+  \********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -434,21 +222,21 @@ module.exports = ".mat-selection-list{\r\n    height: 600px;\r\n    overflow: au
 
 /***/ }),
 
-/***/ "./src/app/right-content/applicants/applicant-edit/applicant-edit.component.html":
-/*!***************************************************************************************!*\
-  !*** ./src/app/right-content/applicants/applicant-edit/applicant-edit.component.html ***!
-  \***************************************************************************************/
+/***/ "./src/app/content/applicants/applicant-edit/applicant-edit.component.html":
+/*!*********************************************************************************!*\
+  !*** ./src/app/content/applicants/applicant-edit/applicant-edit.component.html ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-applicant-filter *ngIf=\"filterShown\" [spec]=\"specialityList\"></app-applicant-filter>\n<simple-notifications></simple-notifications>\n<div class=\"row\">\n    <div class=\"col-md-12 col-sm-12 col-xs-12\">\n        <div class=\"x_panel\">\n            <div class=\"x_title\">\n                <h2>Редагування</h2>\n                <ul class=\"nav navbar-right panel_toolbox\">\n                    <li><a class=\"collapse-link\"><i class=\"fa fa-chevron-up\"></i></a></li>\n                </ul>\n                <div class=\"clearfix\"></div>\n            </div>\n            <div class=\"x_content\">\n                <div class=\"col-md-4\">\n                    <div class=\"col-md-12\">\n                        <div class=\"col-md-3\" style=\"border-right: 2px dotted #34495E\">\n                            <a class=\"btn fa-ico-style\" data-toggle=\"tooltip\" data-placement=\"bottom\" (click)=\"addApplicant()\" title=\"Додати\"><i class=\"fas fa-plus\"></i></a>\n                            <a class=\"btn fa-ico-style\" data-toggle=\"tooltip\" data-placement=\"bottom\" (click)=\"removeApplicant()\" title=\"Видалити\"><i class=\"fas fa-minus\"></i></a>\n                        </div>\n                        <a href=\"#\" class=\"btn fa-ico-style\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Експорт\"><i class=\"far fa-file-excel\"></i></a>\n                        <a id=\"btn-search\" (click)=\"filterShown = !filterShown\" class=\"btn fa-ico-style\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Пошук\"><i class=\"fas fa-search\"></i></a>\n                    </div>\n                    <!---->\n                    <div class=\"col-md-12\">\n                        <span class=\"list-applicant-info\"></span>\n                        <mat-selection-list #list (selectionChange)=\"onNgModelChange($event)\">\n                            <mat-list-option *ngFor=\"let item of applicantsList\" [selected]=\"item.selected\" [value]=\"item\"  (click)=\"selectApplicant(item, $event)\" [disabled]=\"!applicantForm.pristine || newApplicantMode\" color='primary'>\n                                {{item.ApplicantId}} - {{item.ApplicantName}}\n                            </mat-list-option>\n                        </mat-selection-list>\n                    </div>\n                </div>\n                <form [formGroup]=\"applicantForm\" (ngSubmit)=\"saveApplicant()\">\n                    <div class=\"col-md-8\" id=\"form_zero\">\n                    <div class=\"x_panel\">\n                        <div class=\"x_title\">Персональні дані</div>\n                        <div class=\"x_content\">\n                        <div class=\"form-row\">\n                            <div class=\"col\">\n                                <mat-form-field class=\"w-100\">\n                                <input matInput placeholder=\"Ідентифікатор\" formControlName=\"ApplicantId\">\n                                </mat-form-field>\n                                <mat-form-field class=\"w-100\">\n                                <input matInput placeholder=\"Прізвище, ім'я, по-батькові\" formControlName=\"ApplicantName\">\n                                </mat-form-field>\n                                <mat-form-field class=\"w-100\">\n                                <span matPrefix>+380 &nbsp;</span>\n                                <input matInput placeholder=\"Телефон\" formControlName=\"ApplicantPhone\">\n                                </mat-form-field>\n                            </div>\n                            <div class=\"col\">\n                                <mat-form-field class=\"w-100\">\n                                    <input matInput placeholder=\"Назва закладу\" formControlName=\"SchoolCollege\">\n                                </mat-form-field>\n                                <mat-form-field class=\"w-100\">\n                                    <mat-label>Адреса</mat-label>\n                                    <input matInput placeholder=\"Місто, вулиця, тощо...\" formControlName=\"Address\">\n                                </mat-form-field>\n                                <mat-form-field class=\"w-100\">\n                                    <mat-label>Email</mat-label>\n                                    <input matInput placeholder=\"exaple@gmail.com\" formControlName=\"ApplicantMail\">\n                                </mat-form-field>\n                            </div>\n                        </div>\n                        </div>\n                    </div>\n                    <div class=\"x_panel\">\n                        <div class=\"x_title\">Побажання</div>\n                        <div class=\"x_content\">\n                            <div class=\"col-md-6\">\n                                <div class=\"form-group\">\n                                    <mat-form-field class=\"w-100\">\n                                        <mat-select placeholder=\"Спеціальності...\" formControlName=\"Speciality\" multiple #speciality >\n                                            <mat-select-trigger>\n                                                {{speciality.selected ? speciality?.selected[0]?.viewValue : '' }}\n                                                <span *ngIf=\"speciality.selected?.length > 1\" class=\"example-additional-selection\">\n                                                    (+{{speciality.selected.length - 1}} {{speciality.selected?.length === 2 ? 'інша спец.' : 'інші спец.'}})\n                                                </span>\n                                                </mat-select-trigger>\n                                            <mat-option *ngFor=\"let spec of specialityList\" [value]=\"spec.id\">{{spec.name}}</mat-option>\n                                        </mat-select>\n                                    </mat-form-field>\n                                </div>\n                            </div>\n                            <div class=\"col-md-6\">\n                                <div class=\"form-group\">\n                                    <mat-form-field style=\"width: 100%\">\n                                        <textarea matInput placeholder=\"Помітки\" formControlName=\"Mark\"></textarea>\n                                    </mat-form-field>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"x_panel\">\n                        <div class=\"x_title\">Додаткова інформація</div>\n                        <div class=\"x_content\">\n                            <div class=\"col-md-8 form-horizontal\">\n                                <mat-form-field class=\"w-100\">\n                                    <input matInput placeholder=\"Знайшов\" formControlName=\"NameFound\">\n                                </mat-form-field>\n                                <mat-form-field class=\"w-100\">\n                                    <input matInput placeholder=\"Додав\" formControlName=\"NameAdded\">\n                                </mat-form-field>\n                            </div>\n                            <div class=\"col-md-4 form-horizontal\">\n                                <mat-form-field class=\"w-100\">\n                                    <input matInput placeholder=\"Дата створення\" formControlName=\"DateEdit\">\n                                </mat-form-field>\n                                <mat-form-field class=\"w-100\">\n                                    <input matInput placeholder=\"Дата редагування\" formControlName=\"DateAdd\">\n                                </mat-form-field>\n                            </div>\n                        </div>\n                    </div>\n                    \n                    <div class=\"col-md-2  float-right\" *ngIf=\"!applicantForm.pristine || newApplicantMode\">\n                        <button class=\"w-100\" mat-raised-button color=\"primary\" [disabled]=\"!applicantForm.valid\">Зберегти</button>\n                    </div>\n                    <div class=\"col-md-2 col-md-offset-8 float-right\" *ngIf=\"!applicantForm.pristine || newApplicantMode\">\n                        <button class=\"w-100\" mat-raised-button>Відміна</button>\n                    </div>\n                    </div>\n            </form>\n            </div>\n        </div>\n    </div>\n</div>"
+module.exports = "<app-applicant-filter *ngIf=\"filterShown\" [spec]=\"specialityList\"></app-applicant-filter>\n<simple-notifications></simple-notifications>\n<div class=\"row\">\n    <div class=\"col-md-12 col-sm-12 col-xs-12\">\n        <div class=\"x_panel\">\n            <div class=\"x_title\">\n                <h2>Редагування</h2>\n                <ul class=\"nav navbar-right panel_toolbox\">\n                    <li><a class=\"collapse-link\"><i class=\"fa fa-chevron-up\"></i></a></li>\n                </ul>\n                <div class=\"clearfix\"></div>\n            </div>\n            <div class=\"x_content\">\n                <div class=\"col-md-4\">\n                    <div class=\"col-md-12\">\n                        <div class=\"col-md-3\" style=\"border-right: 2px dotted #34495E\">\n                            <a class=\"btn fa-ico-style\" data-toggle=\"tooltip\" data-placement=\"bottom\" (click)=\"addApplicant()\" title=\"Додати\"><i class=\"fas fa-plus\"></i></a>\n                            <a class=\"btn fa-ico-style\" data-toggle=\"tooltip\" data-placement=\"bottom\" (click)=\"removeApplicant()\" title=\"Видалити\"><i class=\"fas fa-minus\"></i></a>\n                        </div>\n                        <a href=\"#\" class=\"btn fa-ico-style\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Експорт\"><i class=\"far fa-file-excel\"></i></a>\n                        <a id=\"btn-search\" (click)=\"filterShown = !filterShown\" class=\"btn fa-ico-style\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Пошук\"><i class=\"fas fa-search\"></i></a>\n                    </div>\n                    <!---->\n                    <div class=\"col-md-12\">\n                        <span class=\"list-applicant-info\"></span>\n                        <mat-selection-list #list (selectionChange)=\"onNgModelChange($event)\">\n                            <mat-list-option *ngFor=\"let item of applicantsList\" [selected]=\"item.selected\" [value]=\"item\"  (click)=\"selectApplicant(item, $event)\" [disabled]=\"!applicantForm.pristine || newApplicantMode\" color='primary'>\n                                {{item.applicantId}} - {{item.nameApplicant}}\n                            </mat-list-option>\n                        </mat-selection-list>\n                    </div>\n                </div>\n                <form [formGroup]=\"applicantForm\" (ngSubmit)=\"saveApplicant()\">\n                    <div class=\"col-md-8\" id=\"form_zero\">\n                    <div class=\"x_panel\">\n                        <div class=\"x_title\">Персональні дані</div>\n                        <div class=\"x_content\">\n                        <div class=\"form-row\">\n                            <div class=\"col\">\n                                <mat-form-field class=\"w-100\">\n                                <input matInput placeholder=\"Ідентифікатор\" formControlName=\"applicantId\">\n                                </mat-form-field>\n                                <mat-form-field class=\"w-100\">\n                                <input matInput placeholder=\"Прізвище, ім'я, по-батькові\" formControlName=\"nameApplicant\">\n                                </mat-form-field>\n                                <mat-form-field class=\"w-100\">\n                                <span matPrefix>+380 &nbsp;</span>\n                                <input matInput placeholder=\"Телефон\" formControlName=\"phoneApplicant\">\n                                </mat-form-field>\n                            </div>\n                            <div class=\"col\">\n                                <mat-form-field class=\"w-100\">\n                                    <input matInput placeholder=\"Назва закладу\" formControlName=\"schoolCollege\">\n                                </mat-form-field>\n                                <mat-form-field class=\"w-100\">\n                                    <mat-label>Адреса</mat-label>\n                                    <input matInput placeholder=\"Місто, вулиця, тощо...\" formControlName=\"address\">\n                                </mat-form-field>\n                                <mat-form-field class=\"w-100\">\n                                    <mat-label>Email</mat-label>\n                                    <input matInput placeholder=\"exaple@gmail.com\" formControlName=\"mailApplicant\">\n                                </mat-form-field>\n                            </div>\n                        </div>\n                        </div>\n                    </div>\n                    <div class=\"x_panel\">\n                        <div class=\"x_title\">Побажання</div>\n                        <div class=\"x_content\">\n                            <div class=\"col-md-6\">\n                                <div class=\"form-group\">\n                                    <mat-form-field class=\"w-100\">\n                                        <mat-select placeholder=\"Спеціальності...\" formControlName=\"speciality\" multiple #speciality >\n                                            <mat-select-trigger>\n                                                {{speciality.selected ? speciality?.selected[0]?.viewValue : '' }}\n                                                <span *ngIf=\"speciality.selected?.length > 1\" class=\"example-additional-selection\">\n                                                    (+{{speciality.selected.length - 1}} {{speciality.selected?.length === 2 ? 'інша спец.' : 'інші спец.'}})\n                                                </span>\n                                                </mat-select-trigger>\n                                            <mat-option *ngFor=\"let spec of specialityList\" [value]=\"spec.id\">{{spec.name}}</mat-option>\n                                        </mat-select>\n                                    </mat-form-field>\n                                </div>\n                            </div>\n                            <div class=\"col-md-6\">\n                                <div class=\"form-group\">\n                                    <mat-form-field style=\"width: 100%\">\n                                        <textarea matInput placeholder=\"Помітки\" formControlName=\"mark\"></textarea>\n                                    </mat-form-field>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"x_panel\">\n                        <div class=\"x_title\">Додаткова інформація</div>\n                        <div class=\"x_content\">\n                            <div class=\"col-md-8 form-horizontal\">\n                                <mat-form-field class=\"w-100\">\n                                    <input matInput placeholder=\"Знайшов\" formControlName=\"nameFound\">\n                                </mat-form-field>\n                                <mat-form-field class=\"w-100\">\n                                    <input matInput placeholder=\"Додав\" formControlName=\"nameAdded\">\n                                </mat-form-field>\n                            </div>\n                            <div class=\"col-md-4 form-horizontal\">\n                                <mat-form-field class=\"w-100\">\n                                    <input matInput placeholder=\"Дата створення\" formControlName=\"dateEdit\">\n                                </mat-form-field>\n                                <mat-form-field class=\"w-100\">\n                                    <input matInput placeholder=\"Дата редагування\" formControlName=\"dateAdd\">\n                                </mat-form-field>\n                            </div>\n                        </div>\n                    </div>\n                    \n                    <div class=\"col-md-2  float-right\" *ngIf=\"!applicantForm.pristine || newApplicantMode\">\n                        <button class=\"w-100\" mat-raised-button color=\"primary\" [disabled]=\"!applicantForm.valid\">Зберегти</button>\n                    </div>\n                    <div class=\"col-md-2 col-md-offset-8 float-right\" *ngIf=\"!applicantForm.pristine || newApplicantMode\">\n                        <button class=\"w-100\" mat-raised-button>Відміна</button>\n                    </div>\n                    </div>\n            </form>\n            </div>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
-/***/ "./src/app/right-content/applicants/applicant-edit/applicant-edit.component.ts":
-/*!*************************************************************************************!*\
-  !*** ./src/app/right-content/applicants/applicant-edit/applicant-edit.component.ts ***!
-  \*************************************************************************************/
+/***/ "./src/app/content/applicants/applicant-edit/applicant-edit.component.ts":
+/*!*******************************************************************************!*\
+  !*** ./src/app/content/applicants/applicant-edit/applicant-edit.component.ts ***!
+  \*******************************************************************************/
 /*! exports provided: ApplicantEditComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -457,7 +245,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApplicantEditComponent", function() { return ApplicantEditComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _shared_applicant_manager_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/applicant-manager.service */ "./src/app/right-content/applicants/shared/applicant-manager.service.ts");
+/* harmony import */ var _shared_applicant_manager_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/applicant-manager.service */ "./src/app/content/applicants/shared/applicant-manager.service.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var angular2_notifications__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! angular2-notifications */ "./node_modules/angular2-notifications/angular2-notifications.umd.js");
 /* harmony import */ var angular2_notifications__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(angular2_notifications__WEBPACK_IMPORTED_MODULE_4__);
@@ -491,23 +279,29 @@ var ApplicantEditComponent = /** @class */ (function () {
         this.multiSelect = false;
         this.newApplicantMode = false;
         this.applicantForm = formBuilder.group({
-            "ApplicantId": [{ value: "", disabled: true }],
-            "ApplicantName": [{ value: "", disabled: true }, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            "ApplicantPhone": [{ value: "", disabled: true }, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            "SchoolCollege": [{ value: "", disabled: true }, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            "Address": [{ value: "", disabled: true }, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            "ApplicantMail": [{ value: "", disabled: true }, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].email],
-            "Speciality": [{ value: "", disabled: true }, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            "Mark": [{ value: "", disabled: true }],
-            "NameFound": [{ value: "", disabled: true }, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            "NameAdded": [{ value: "", disabled: true }],
-            "DateEdit": [{ value: "", disabled: true }],
-            "DateAdd": [{ value: "", disabled: true }]
+            "applicantId": [{ value: "", disabled: true }],
+            "nameApplicant": [{ value: "", disabled: true }, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            "phoneApplicant": [{ value: "", disabled: true }, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            "schoolCollege": [{ value: "", disabled: true }, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            "address": [{ value: "", disabled: true }, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            "mailApplicant": [{ value: "", disabled: true }, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].email],
+            "speciality": [{ value: "", disabled: true }, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            "mark": [{ value: "", disabled: true }],
+            "nameFound": [{ value: "", disabled: true }, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            "nameAdded": [{ value: "", disabled: true }],
+            "dateEdit": [{ value: "", disabled: true }],
+            "dateAdd": [{ value: "", disabled: true }]
         });
         this.applicantManager = applicantManager;
     }
     ApplicantEditComponent.prototype.ngOnInit = function () {
-        this.applicantsList = this.applicantManager.getApplicantList().reverse();
+        var _this = this;
+        this.applicantManager.getApplicantList().subscribe(function (p) {
+            for (var i = 0; i < p.length; i++) {
+                delete p[i]['lazyLoader'];
+                _this.applicantsList[i] = __assign({}, p[i]);
+            }
+        });
         this.specialityList = this.applicantManager.getSpecialityList();
     };
     ApplicantEditComponent.prototype.selectApplicant = function (applicant, event) {
@@ -517,10 +311,10 @@ var ApplicantEditComponent = /** @class */ (function () {
             if (this.applicantForm.controls[key] !== undefined) {
                 this.applicantForm.controls[key].setValue(applicant[key]);
                 switch (key) {
-                    case "ApplicantId":
-                    case "NameAdded":
-                    case "DateEdit":
-                    case "DateAdd":
+                    case "applicantId":
+                    case "nameAdded":
+                    case "dateEdit":
+                    case "dateAdd":
                         continue;
                 }
                 this.applicantForm.controls[key].enable();
@@ -573,8 +367,8 @@ var ApplicantEditComponent = /** @class */ (function () {
     ApplicantEditComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-applicant-edit',
-            template: __webpack_require__(/*! ./applicant-edit.component.html */ "./src/app/right-content/applicants/applicant-edit/applicant-edit.component.html"),
-            styles: [__webpack_require__(/*! ./applicant-edit.component.css */ "./src/app/right-content/applicants/applicant-edit/applicant-edit.component.css")]
+            template: __webpack_require__(/*! ./applicant-edit.component.html */ "./src/app/content/applicants/applicant-edit/applicant-edit.component.html"),
+            styles: [__webpack_require__(/*! ./applicant-edit.component.css */ "./src/app/content/applicants/applicant-edit/applicant-edit.component.css")]
         }),
         __metadata("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"], _shared_applicant_manager_service__WEBPACK_IMPORTED_MODULE_2__["ApplicantManagerService"], angular2_notifications__WEBPACK_IMPORTED_MODULE_4__["NotificationsService"]])
     ], ApplicantEditComponent);
@@ -585,10 +379,10 @@ var ApplicantEditComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/right-content/applicants/applicant-filter/applicant-filter.component.css":
-/*!******************************************************************************************!*\
-  !*** ./src/app/right-content/applicants/applicant-filter/applicant-filter.component.css ***!
-  \******************************************************************************************/
+/***/ "./src/app/content/applicants/applicant-filter/applicant-filter.component.css":
+/*!************************************************************************************!*\
+  !*** ./src/app/content/applicants/applicant-filter/applicant-filter.component.css ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -596,10 +390,10 @@ module.exports = ".example-additional-selection{\r\n    opacity: 0.75;\r\n    fo
 
 /***/ }),
 
-/***/ "./src/app/right-content/applicants/applicant-filter/applicant-filter.component.html":
-/*!*******************************************************************************************!*\
-  !*** ./src/app/right-content/applicants/applicant-filter/applicant-filter.component.html ***!
-  \*******************************************************************************************/
+/***/ "./src/app/content/applicants/applicant-filter/applicant-filter.component.html":
+/*!*************************************************************************************!*\
+  !*** ./src/app/content/applicants/applicant-filter/applicant-filter.component.html ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -607,10 +401,10 @@ module.exports = "<div class=\"row\">\n  <div class=\"col-md-12 col-sm-12 col-xs
 
 /***/ }),
 
-/***/ "./src/app/right-content/applicants/applicant-filter/applicant-filter.component.ts":
-/*!*****************************************************************************************!*\
-  !*** ./src/app/right-content/applicants/applicant-filter/applicant-filter.component.ts ***!
-  \*****************************************************************************************/
+/***/ "./src/app/content/applicants/applicant-filter/applicant-filter.component.ts":
+/*!***********************************************************************************!*\
+  !*** ./src/app/content/applicants/applicant-filter/applicant-filter.component.ts ***!
+  \***********************************************************************************/
 /*! exports provided: ApplicantFilterComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -650,8 +444,8 @@ var ApplicantFilterComponent = /** @class */ (function () {
     ApplicantFilterComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-applicant-filter',
-            template: __webpack_require__(/*! ./applicant-filter.component.html */ "./src/app/right-content/applicants/applicant-filter/applicant-filter.component.html"),
-            styles: [__webpack_require__(/*! ./applicant-filter.component.css */ "./src/app/right-content/applicants/applicant-filter/applicant-filter.component.css")]
+            template: __webpack_require__(/*! ./applicant-filter.component.html */ "./src/app/content/applicants/applicant-filter/applicant-filter.component.html"),
+            styles: [__webpack_require__(/*! ./applicant-filter.component.css */ "./src/app/content/applicants/applicant-filter/applicant-filter.component.css")]
         }),
         __metadata("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]])
     ], ApplicantFilterComponent);
@@ -662,10 +456,10 @@ var ApplicantFilterComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/right-content/applicants/applicant-table/applicant-table.component.css":
-/*!****************************************************************************************!*\
-  !*** ./src/app/right-content/applicants/applicant-table/applicant-table.component.css ***!
-  \****************************************************************************************/
+/***/ "./src/app/content/applicants/applicant-table/applicant-table.component.css":
+/*!**********************************************************************************!*\
+  !*** ./src/app/content/applicants/applicant-table/applicant-table.component.css ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -673,10 +467,10 @@ module.exports = ""
 
 /***/ }),
 
-/***/ "./src/app/right-content/applicants/applicant-table/applicant-table.component.html":
-/*!*****************************************************************************************!*\
-  !*** ./src/app/right-content/applicants/applicant-table/applicant-table.component.html ***!
-  \*****************************************************************************************/
+/***/ "./src/app/content/applicants/applicant-table/applicant-table.component.html":
+/*!***********************************************************************************!*\
+  !*** ./src/app/content/applicants/applicant-table/applicant-table.component.html ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -684,10 +478,10 @@ module.exports = "<p>\n  applicant-table works!\n</p>\n"
 
 /***/ }),
 
-/***/ "./src/app/right-content/applicants/applicant-table/applicant-table.component.ts":
-/*!***************************************************************************************!*\
-  !*** ./src/app/right-content/applicants/applicant-table/applicant-table.component.ts ***!
-  \***************************************************************************************/
+/***/ "./src/app/content/applicants/applicant-table/applicant-table.component.ts":
+/*!*********************************************************************************!*\
+  !*** ./src/app/content/applicants/applicant-table/applicant-table.component.ts ***!
+  \*********************************************************************************/
 /*! exports provided: ApplicantTableComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -713,8 +507,8 @@ var ApplicantTableComponent = /** @class */ (function () {
     ApplicantTableComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-applicant-table',
-            template: __webpack_require__(/*! ./applicant-table.component.html */ "./src/app/right-content/applicants/applicant-table/applicant-table.component.html"),
-            styles: [__webpack_require__(/*! ./applicant-table.component.css */ "./src/app/right-content/applicants/applicant-table/applicant-table.component.css")]
+            template: __webpack_require__(/*! ./applicant-table.component.html */ "./src/app/content/applicants/applicant-table/applicant-table.component.html"),
+            styles: [__webpack_require__(/*! ./applicant-table.component.css */ "./src/app/content/applicants/applicant-table/applicant-table.component.css")]
         }),
         __metadata("design:paramtypes", [])
     ], ApplicantTableComponent);
@@ -725,10 +519,10 @@ var ApplicantTableComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/right-content/applicants/applicants-routing.module.ts":
-/*!***********************************************************************!*\
-  !*** ./src/app/right-content/applicants/applicants-routing.module.ts ***!
-  \***********************************************************************/
+/***/ "./src/app/content/applicants/applicants-routing.module.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/content/applicants/applicants-routing.module.ts ***!
+  \*****************************************************************/
 /*! exports provided: ApplicantsRoutingModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -737,8 +531,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApplicantsRoutingModule", function() { return ApplicantsRoutingModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _applicant_edit_applicant_edit_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./applicant-edit/applicant-edit.component */ "./src/app/right-content/applicants/applicant-edit/applicant-edit.component.ts");
-/* harmony import */ var _applicant_table_applicant_table_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./applicant-table/applicant-table.component */ "./src/app/right-content/applicants/applicant-table/applicant-table.component.ts");
+/* harmony import */ var _applicant_edit_applicant_edit_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./applicant-edit/applicant-edit.component */ "./src/app/content/applicants/applicant-edit/applicant-edit.component.ts");
+/* harmony import */ var _applicant_table_applicant_table_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./applicant-table/applicant-table.component */ "./src/app/content/applicants/applicant-table/applicant-table.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -769,10 +563,10 @@ var ApplicantsRoutingModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/right-content/applicants/applicants.module.ts":
-/*!***************************************************************!*\
-  !*** ./src/app/right-content/applicants/applicants.module.ts ***!
-  \***************************************************************/
+/***/ "./src/app/content/applicants/applicants.module.ts":
+/*!*********************************************************!*\
+  !*** ./src/app/content/applicants/applicants.module.ts ***!
+  \*********************************************************/
 /*! exports provided: ApplicantsModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -780,12 +574,12 @@ var ApplicantsRoutingModule = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApplicantsModule", function() { return ApplicantsModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _applicant_table_applicant_table_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./applicant-table/applicant-table.component */ "./src/app/right-content/applicants/applicant-table/applicant-table.component.ts");
-/* harmony import */ var _applicant_edit_applicant_edit_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./applicant-edit/applicant-edit.component */ "./src/app/right-content/applicants/applicant-edit/applicant-edit.component.ts");
-/* harmony import */ var _applicant_filter_applicant_filter_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./applicant-filter/applicant-filter.component */ "./src/app/right-content/applicants/applicant-filter/applicant-filter.component.ts");
-/* harmony import */ var _applicants_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./applicants-routing.module */ "./src/app/right-content/applicants/applicants-routing.module.ts");
+/* harmony import */ var _applicant_table_applicant_table_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./applicant-table/applicant-table.component */ "./src/app/content/applicants/applicant-table/applicant-table.component.ts");
+/* harmony import */ var _applicant_edit_applicant_edit_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./applicant-edit/applicant-edit.component */ "./src/app/content/applicants/applicant-edit/applicant-edit.component.ts");
+/* harmony import */ var _applicant_filter_applicant_filter_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./applicant-filter/applicant-filter.component */ "./src/app/content/applicants/applicant-filter/applicant-filter.component.ts");
+/* harmony import */ var _applicants_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./applicants-routing.module */ "./src/app/content/applicants/applicants-routing.module.ts");
 /* harmony import */ var _shared_global_shared_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../shared/global-shared.module */ "./src/app/shared/global-shared.module.ts");
-/* harmony import */ var _shared_applicant_manager_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shared/applicant-manager.service */ "./src/app/right-content/applicants/shared/applicant-manager.service.ts");
+/* harmony import */ var _shared_applicant_manager_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shared/applicant-manager.service */ "./src/app/content/applicants/shared/applicant-manager.service.ts");
 /* harmony import */ var angular2_notifications__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! angular2-notifications */ "./node_modules/angular2-notifications/angular2-notifications.umd.js");
 /* harmony import */ var angular2_notifications__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(angular2_notifications__WEBPACK_IMPORTED_MODULE_7__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -828,56 +622,10 @@ var ApplicantsModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/right-content/applicants/shared/ApplicantModel.ts":
-/*!*******************************************************************!*\
-  !*** ./src/app/right-content/applicants/shared/ApplicantModel.ts ***!
-  \*******************************************************************/
-/*! exports provided: ApplicantModel */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApplicantModel", function() { return ApplicantModel; });
-var ApplicantModel = /** @class */ (function () {
-    function ApplicantModel(ApplicantId, ApplicantName, ApplicantMail, ApplicantPhone, SchoolCollege, Address, Speciality, Mark, NameFound, NameAdded, DateEdit, DateAdd, selected) {
-        if (ApplicantId === void 0) { ApplicantId = ""; }
-        if (ApplicantName === void 0) { ApplicantName = ""; }
-        if (ApplicantMail === void 0) { ApplicantMail = ""; }
-        if (ApplicantPhone === void 0) { ApplicantPhone = ""; }
-        if (SchoolCollege === void 0) { SchoolCollege = ""; }
-        if (Address === void 0) { Address = ""; }
-        if (Speciality === void 0) { Speciality = []; }
-        if (Mark === void 0) { Mark = ""; }
-        if (NameFound === void 0) { NameFound = ""; }
-        if (NameAdded === void 0) { NameAdded = ""; }
-        if (DateEdit === void 0) { DateEdit = ""; }
-        if (DateAdd === void 0) { DateAdd = ""; }
-        if (selected === void 0) { selected = false; }
-        this.ApplicantId = ApplicantId;
-        this.ApplicantName = ApplicantName;
-        this.ApplicantMail = ApplicantMail;
-        this.ApplicantPhone = ApplicantPhone;
-        this.SchoolCollege = SchoolCollege;
-        this.Address = Address;
-        this.Speciality = Speciality;
-        this.Mark = Mark;
-        this.NameFound = NameFound;
-        this.NameAdded = NameAdded;
-        this.DateEdit = DateEdit;
-        this.DateAdd = DateAdd;
-        this.selected = selected;
-    }
-    return ApplicantModel;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/right-content/applicants/shared/applicant-manager.service.ts":
-/*!******************************************************************************!*\
-  !*** ./src/app/right-content/applicants/shared/applicant-manager.service.ts ***!
-  \******************************************************************************/
+/***/ "./src/app/content/applicants/shared/applicant-manager.service.ts":
+/*!************************************************************************!*\
+  !*** ./src/app/content/applicants/shared/applicant-manager.service.ts ***!
+  \************************************************************************/
 /*! exports provided: ApplicantManagerService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -885,24 +633,25 @@ var ApplicantModel = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApplicantManagerService", function() { return ApplicantManagerService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _ApplicantModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ApplicantModel */ "./src/app/right-content/applicants/shared/ApplicantModel.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
 
 var ApplicantManagerService = /** @class */ (function () {
-    function ApplicantManagerService() {
-        this.testList = [
-            new _ApplicantModel__WEBPACK_IMPORTED_MODULE_1__["ApplicantModel"]('1', "test1", "ahe@gmail.com", "669966506", "DUT", "Kyiv", [1], "", "Test2", "Test3", "10.10.2018 18:20", "10.10.2018 18:20"),
-            new _ApplicantModel__WEBPACK_IMPORTED_MODULE_1__["ApplicantModel"]('2', "test1", "ahe@gmail.com", "669966506", "DUT", "Kyiv", [2], "", "Test2", "Test3", "10.10.2018 18:20", "10.10.2018 18:20")
-        ];
+    function ApplicantManagerService(_http) {
+        this._http = _http;
+        this.testList = [];
     }
     ApplicantManagerService.prototype.getApplicantList = function () {
-        return this.testList;
+        return this._http.get('api/applicant/list');
     };
     ApplicantManagerService.prototype.getApplicantTable = function () {
     };
@@ -910,10 +659,12 @@ var ApplicantManagerService = /** @class */ (function () {
         return [{ id: 1, name: "test" }, { id: 2, name: "test2" }];
     };
     ApplicantManagerService.prototype.addApplicant = function () {
-        var newModel = new _ApplicantModel__WEBPACK_IMPORTED_MODULE_1__["ApplicantModel"]("0*", "Новий абітурієнт");
+        /*let newModel = new ApplicantModel("0*", "Новий абітурієнт");
         newModel.selected = true;
         this.testList.unshift(newModel);
-        return newModel;
+    
+        return newModel;*/
+        return null;
     };
     ApplicantManagerService.prototype.removeApplicant = function (model) {
         var idx = this.testList.indexOf(model, 0);
@@ -922,17 +673,17 @@ var ApplicantManagerService = /** @class */ (function () {
         }
     };
     ApplicantManagerService.prototype.saveApplicant = function (model) {
-        var id = this.testList.findIndex(function (p) { return p.ApplicantId == model.ApplicantId; });
+        var id = this.testList.findIndex(function (p) { return p.applicantId == model.applicantId; });
         if (id !== -1) {
             this.testList[id] = model;
             this.testList[id].selected = true;
-            if (model.ApplicantId === "0*") {
+            if (model.applicantId === "0*") {
                 if (this.testList.length > 1) {
-                    var lastIdx = this.testList[1].ApplicantId;
-                    this.testList[id].ApplicantId = +lastIdx + 1 + '';
+                    var lastIdx = this.testList[1].applicantId;
+                    this.testList[id].applicantId = +lastIdx + 1 + '';
                 }
                 else {
-                    this.testList[id].ApplicantId = '1';
+                    this.testList[id].applicantId = '1';
                 }
             }
         }
@@ -940,7 +691,8 @@ var ApplicantManagerService = /** @class */ (function () {
     ApplicantManagerService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
-        })
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], ApplicantManagerService);
     return ApplicantManagerService;
 }());
@@ -949,10 +701,10 @@ var ApplicantManagerService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/right-content/news/news-routing.module.ts":
-/*!***********************************************************!*\
-  !*** ./src/app/right-content/news/news-routing.module.ts ***!
-  \***********************************************************/
+/***/ "./src/app/content/news/news-routing.module.ts":
+/*!*****************************************************!*\
+  !*** ./src/app/content/news/news-routing.module.ts ***!
+  \*****************************************************/
 /*! exports provided: NewsRoutingModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -961,7 +713,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewsRoutingModule", function() { return NewsRoutingModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _news_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./news.component */ "./src/app/right-content/news/news.component.ts");
+/* harmony import */ var _news_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./news.component */ "./src/app/content/news/news.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -990,10 +742,10 @@ var NewsRoutingModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/right-content/news/news.component.css":
-/*!*******************************************************!*\
-  !*** ./src/app/right-content/news/news.component.css ***!
-  \*******************************************************/
+/***/ "./src/app/content/news/news.component.css":
+/*!*************************************************!*\
+  !*** ./src/app/content/news/news.component.css ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1001,10 +753,10 @@ module.exports = ""
 
 /***/ }),
 
-/***/ "./src/app/right-content/news/news.component.html":
-/*!********************************************************!*\
-  !*** ./src/app/right-content/news/news.component.html ***!
-  \********************************************************/
+/***/ "./src/app/content/news/news.component.html":
+/*!**************************************************!*\
+  !*** ./src/app/content/news/news.component.html ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1012,10 +764,10 @@ module.exports = "<div class=\"row\">\n    <div class=\"col-md-12 col-sm-12 col-
 
 /***/ }),
 
-/***/ "./src/app/right-content/news/news.component.ts":
-/*!******************************************************!*\
-  !*** ./src/app/right-content/news/news.component.ts ***!
-  \******************************************************/
+/***/ "./src/app/content/news/news.component.ts":
+/*!************************************************!*\
+  !*** ./src/app/content/news/news.component.ts ***!
+  \************************************************/
 /*! exports provided: NewsComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1041,8 +793,8 @@ var NewsComponent = /** @class */ (function () {
     NewsComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-news',
-            template: __webpack_require__(/*! ./news.component.html */ "./src/app/right-content/news/news.component.html"),
-            styles: [__webpack_require__(/*! ./news.component.css */ "./src/app/right-content/news/news.component.css")]
+            template: __webpack_require__(/*! ./news.component.html */ "./src/app/content/news/news.component.html"),
+            styles: [__webpack_require__(/*! ./news.component.css */ "./src/app/content/news/news.component.css")]
         }),
         __metadata("design:paramtypes", [])
     ], NewsComponent);
@@ -1053,10 +805,10 @@ var NewsComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/right-content/news/news.module.ts":
-/*!***************************************************!*\
-  !*** ./src/app/right-content/news/news.module.ts ***!
-  \***************************************************/
+/***/ "./src/app/content/news/news.module.ts":
+/*!*********************************************!*\
+  !*** ./src/app/content/news/news.module.ts ***!
+  \*********************************************/
 /*! exports provided: NewsModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1064,7 +816,7 @@ var NewsComponent = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewsModule", function() { return NewsModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _news_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./news-routing.module */ "./src/app/right-content/news/news-routing.module.ts");
+/* harmony import */ var _news_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./news-routing.module */ "./src/app/content/news/news-routing.module.ts");
 /* harmony import */ var _shared_global_shared_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../shared/global-shared.module */ "./src/app/shared/global-shared.module.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1094,10 +846,10 @@ var NewsModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/right-content/right-content.component.css":
-/*!***********************************************************!*\
-  !*** ./src/app/right-content/right-content.component.css ***!
-  \***********************************************************/
+/***/ "./src/app/content/right-content.component.css":
+/*!*****************************************************!*\
+  !*** ./src/app/content/right-content.component.css ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1105,10 +857,10 @@ module.exports = ""
 
 /***/ }),
 
-/***/ "./src/app/right-content/right-content.component.html":
-/*!************************************************************!*\
-  !*** ./src/app/right-content/right-content.component.html ***!
-  \************************************************************/
+/***/ "./src/app/content/right-content.component.html":
+/*!******************************************************!*\
+  !*** ./src/app/content/right-content.component.html ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1116,10 +868,10 @@ module.exports = "<!-- page content -->\n<div class=\"right_col\" role=\"main\">
 
 /***/ }),
 
-/***/ "./src/app/right-content/right-content.component.ts":
-/*!**********************************************************!*\
-  !*** ./src/app/right-content/right-content.component.ts ***!
-  \**********************************************************/
+/***/ "./src/app/content/right-content.component.ts":
+/*!****************************************************!*\
+  !*** ./src/app/content/right-content.component.ts ***!
+  \****************************************************/
 /*! exports provided: RightContentComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1145,12 +897,201 @@ var RightContentComponent = /** @class */ (function () {
     RightContentComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-right-content',
-            template: __webpack_require__(/*! ./right-content.component.html */ "./src/app/right-content/right-content.component.html"),
-            styles: [__webpack_require__(/*! ./right-content.component.css */ "./src/app/right-content/right-content.component.css")]
+            template: __webpack_require__(/*! ./right-content.component.html */ "./src/app/content/right-content.component.html"),
+            styles: [__webpack_require__(/*! ./right-content.component.css */ "./src/app/content/right-content.component.css")]
         }),
         __metadata("design:paramtypes", [])
     ], RightContentComponent);
     return RightContentComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/menu/footer-menu/footer-menu.component.css":
+/*!************************************************************!*\
+  !*** ./src/app/menu/footer-menu/footer-menu.component.css ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/menu/footer-menu/footer-menu.component.html":
+/*!*************************************************************!*\
+  !*** ./src/app/menu/footer-menu/footer-menu.component.html ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<!-- /menu footer buttons -->\n<div class=\"sidebar-footer hidden-small\">\n  <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Налаштування\">\n    <i class=\"fas fa-cog\"></i>\n  </a>\n  <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"FullScreen\">\n    <i class=\"fas fa-arrows-alt\"></i>\n  </a>\n  <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Lock\">\n    <i class=\"fas fa-eye-slash\"></i>\n  </a>\n  <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Вихід\" href=\"/\">\n    <i class=\"fas fa-power-off\"></i>\n  </a>\n</div>\n<!-- /menu footer buttons -->"
+
+/***/ }),
+
+/***/ "./src/app/menu/footer-menu/footer-menu.component.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/menu/footer-menu/footer-menu.component.ts ***!
+  \***********************************************************/
+/*! exports provided: FooterMenuComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FooterMenuComponent", function() { return FooterMenuComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var FooterMenuComponent = /** @class */ (function () {
+    function FooterMenuComponent() {
+    }
+    FooterMenuComponent.prototype.ngOnInit = function () {
+    };
+    FooterMenuComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-footer-menu',
+            template: __webpack_require__(/*! ./footer-menu.component.html */ "./src/app/menu/footer-menu/footer-menu.component.html"),
+            styles: [__webpack_require__(/*! ./footer-menu.component.css */ "./src/app/menu/footer-menu/footer-menu.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], FooterMenuComponent);
+    return FooterMenuComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/menu/left-menu.component.css":
+/*!**********************************************!*\
+  !*** ./src/app/menu/left-menu.component.css ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/menu/left-menu.component.html":
+/*!***********************************************!*\
+  !*** ./src/app/menu/left-menu.component.html ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"col-md-3 left_col\">\n  <div class=\"left_col scroll-view\">\n    <div class=\"navbar nav_title\" style=\"border: 0;\">\n      <a routerLink=\"/\" class=\"site_title\"><i class=\"fab fa-dyalog\" style=\"font-size: 30px\"></i> <span class=\"ml-3\">UniDash | DUT</span></a>\n    </div>\n\n    <div class=\"clearfix\"></div>\n\n    <!-- menu profile quick info -->\n    <div class=\"profile clearfix\">\n      <div class=\"profile_pic\">\n          <img src=\"../../assets/images/user.png\" alt=\"...\" class=\"img-circle profile_img\">\n      </div>\n      <div class=\"profile_info\">\n          <span>Ласкаво просимо,</span>\n          <h2>Roman Kolesnyk</h2>\n      </div>\n      <div class=\"clearfix\"></div>\n    </div>\n    <!-- /menu profile quick info -->\n\n    <br />\n\n    <app-list-menu></app-list-menu>\n    <app-footer-menu></app-footer-menu>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/menu/left-menu.component.ts":
+/*!*********************************************!*\
+  !*** ./src/app/menu/left-menu.component.ts ***!
+  \*********************************************/
+/*! exports provided: LeftMenuComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LeftMenuComponent", function() { return LeftMenuComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var LeftMenuComponent = /** @class */ (function () {
+    function LeftMenuComponent() {
+    }
+    LeftMenuComponent.prototype.ngOnInit = function () {
+    };
+    LeftMenuComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-left-menu',
+            template: __webpack_require__(/*! ./left-menu.component.html */ "./src/app/menu/left-menu.component.html"),
+            styles: [__webpack_require__(/*! ./left-menu.component.css */ "./src/app/menu/left-menu.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], LeftMenuComponent);
+    return LeftMenuComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/menu/list-menu/list-menu.component.css":
+/*!********************************************************!*\
+  !*** ./src/app/menu/list-menu/list-menu.component.css ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/menu/list-menu/list-menu.component.html":
+/*!*********************************************************!*\
+  !*** ./src/app/menu/list-menu/list-menu.component.html ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = " <!-- sidebar menu -->\n <div id=\"sidebar-menu\" class=\"main_menu_side hidden-print main_menu\">\n  <div class=\"menu_section\">\n      <h3>Головне</h3>\n      <ul class=\"nav side-menu\">\n          <li><a><i class=\"fas fa-home\" style=\"font-size: 18px\"></i><span class=\"ml-3\">Головна</span> </a></li>\n          <li><a><i class=\"far fa-edit\"  style=\"font-size: 18px\"></i><span class=\"ml-3\">Абітурієнти</span><span class=\"fa fa-chevron-down fanew\"></span></a>\n              <ul class=\"nav child_menu\">\n                  <li routerLinkActive=\"current-page\"><a routerLink=\"applicants/\">Таблиця</a></li>\n                  <li routerLinkActive=\"current-page\"><a routerLink=\"applicants/edit\">Редагування</a></li>\n                  <li routerLinkActive=\"current-page\"><a href=\"form_advanced.html\">Статистика</a></li>\n              </ul>\n          </li>\n          <li>\n              <a><i class=\"fa fa-edit\" style=\"font-size: 18px\"></i><span class=\"ml-3\">Вступна компанія</span><span class=\"fa fa-chevron-down fanew\"></span></a>\n              <ul class=\"nav child_menu\">\n                  <li><a href=\"#\">Редагування</a></li>\n                  <li><a href=\"form_advanced.html\">Статистика</a></li>\n                  <li><a href=\"form_validation.html\">Експорт</a></li>\n              </ul>\n          </li>\n          <li><a href=\"#\"><i class=\"far fa-newspaper\"  style=\"font-size: 18px\"></i><span class=\"ml-3\">Електронний журнал</span> </a></li>\n          <li><a href=\"#\"><i class=\"fas fa-calendar-alt\"  style=\"font-size: 18px\"></i><span class=\"ml-3 mr-1\">Розклад</span></a></li>\n      </ul>\n  </div>\n  <div class=\"menu_section\">\n      <h3>Адміністрування</h3>\n      <ul class=\"nav side-menu\">\n          <li>\n              <a><i class=\"fas fa-users\" style=\"font-size: 18px\"></i><span class=\"ml-3\">Користувачі</span><span class=\"fa fa-chevron-down fanew\"></span></a>\n              <ul class=\"nav child_menu\">\n                  <li><a href=\"#\">Список</a></li>\n                  <li><a href=\"projects.html\">Підтвердження</a></li>\n                  <li><a href=\"#\">Доступ</a></li>\n              </ul>\n          </li>\n          <li>\n              <a><i class=\"fas fa-university\" style=\"font-size: 18px\"></i><span class=\"ml-3\">Університет</span><span class=\"fa fa-chevron-down fanew\"></span></a>\n              <ul class=\"nav child_menu\">\n                  <li><a href=\"#\">Структура університету</a></li>\n              </ul>\n          </li>\n          <li>\n              <a><i class=\"fas fa-toolbox\" style=\"font-size: 18px\"></i><span class=\"ml-3\">Система</span><span class=\"fa fa-chevron-down fanew\"></span></a>\n              <ul class=\"nav child_menu\">\n                  <li><a href=\"#\">Функції</a></li>\n                  <li><a href=\"projects.html\">Логування</a></li>\n                  <li><a href=\"projects.html\">База</a></li>\n              </ul>\n          </li>\n      </ul>\n  </div>\n\n</div>\n<!-- /sidebar menu -->\n"
+
+/***/ }),
+
+/***/ "./src/app/menu/list-menu/list-menu.component.ts":
+/*!*******************************************************!*\
+  !*** ./src/app/menu/list-menu/list-menu.component.ts ***!
+  \*******************************************************/
+/*! exports provided: ListMenuComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListMenuComponent", function() { return ListMenuComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ListMenuComponent = /** @class */ (function () {
+    function ListMenuComponent() {
+    }
+    ListMenuComponent.prototype.ngOnInit = function () {
+    };
+    ListMenuComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-list-menu',
+            template: __webpack_require__(/*! ./list-menu.component.html */ "./src/app/menu/list-menu/list-menu.component.html"),
+            styles: [__webpack_require__(/*! ./list-menu.component.css */ "./src/app/menu/list-menu/list-menu.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ListMenuComponent);
+    return ListMenuComponent;
 }());
 
 
@@ -1169,9 +1110,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlobalSharedModule", function() { return GlobalSharedModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1193,14 +1134,14 @@ var GlobalSharedModule = /** @class */ (function () {
             ],
             exports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
-                _angular_http__WEBPACK_IMPORTED_MODULE_2__["HttpModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatFormFieldModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatInputModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatButtonModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatProgressBarModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatListModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatSelectModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatFormFieldModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatInputModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatButtonModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatProgressBarModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatListModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatSelectModule"],
             ]
         })
     ], GlobalSharedModule);
@@ -1337,7 +1278,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\agent\OneDrive\Документы\Visual Studio 2017\Projects\Asp core\UniDash\UniDash\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\agent\source\repos\Asp core\UniDash\UniDash\angular\src\main.ts */"./src/main.ts");
 
 
 /***/ })
