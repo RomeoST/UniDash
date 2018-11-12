@@ -1,0 +1,52 @@
+<div style="padding-top: 50px;">
+  <p class="tip">UniDash - University Dashboard</p>
+  <div [ngClass]="{'cont': true, 's--signup' : toogleSignUp}">
+    <div class="form sign-in">
+      <h2>Ласкаво просимо,</h2>
+      <label>
+        <span>Email</span>
+        <input type="email" />
+      </label>
+      <label>
+        <span>Пароль</span>
+        <input type="password" />
+      </label>
+      <p class="forgot-pass">Не пам'ятаєте паролю?</p>
+      <button type="button" class="submit">Увійти</button>
+      <button type="button" class="fb-btn">Увійти через <span>facebook</span>(скоро)</button>
+    </div>
+    <div class="sub-cont">
+      <div class="img">
+        <div class="img__text m--up">
+          <h2>Вперше тут?</h2>
+          <p>Зареєструйтеся та відкрийте для себе велику кількість нових можливостей!</p>
+        </div>
+        <div class="img__text m--in">
+          <h2>Вже є аккаунт?</h2>
+          <p>Якщо у вас вже є обліковий запис, просто увійдіть. Ми пропустимо вас!</p>
+        </div>
+        <div class="img__btn" (click)='toogleSignUp = !toogleSignUp'>
+          <span class="m--up">Зараєструватися</span>
+          <span class="m--in">Увійти</span>
+        </div>
+      </div>
+      <div class="form sign-up">
+        <h2>Час відчувати себе як вдома,</h2>
+        <label>
+          <span>Логін</span>
+          <input type="text" />
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" />
+        </label>
+        <label>
+          <span>Пароль</span>
+          <input type="password" />
+        </label>
+        <button type="button" class="submit">Зареєструйтеся</button>
+        <button type="button" class="fb-btn">Приєднатися через <span>facebook</span>(скоро)</button>
+      </div>
+    </div>
+  </div>
+</div> 

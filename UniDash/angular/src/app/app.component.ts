@@ -5,6 +5,8 @@ import { map, catchError, toArray  } from 'rxjs/operators';
 import { throwError, of } from "rxjs";
 
 import { NotificationsService } from 'angular2-notifications';
+import { AuthenticationService } from './shared/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,15 +14,15 @@ import { NotificationsService } from 'angular2-notifications';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(
-    //private http : Http, 
-    private _notifications: NotificationsService
-    ){}
+
+  isAuth : boolean = false;
+
+  constructor(private _authService : AuthenticationService ,private _notifications: NotificationsService){
+    this._authService.isUserLoggedIn.subscribe(p => {
+      this.isAuth = p;
+    })
+  }
 
   ngOnInit(){
-    
-    /*let test = this.http.get('api/applicant/list').pipe(
-      map(res => res.json())).subscribe(res => console.log(res));*/
-
   }
 }

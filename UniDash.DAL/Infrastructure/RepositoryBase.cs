@@ -82,12 +82,22 @@ namespace UniDash.DAL.Infrastructure
 
         public virtual T Get(Expression<Func<T, bool>> where)
         {
-            return dbSet.Find(where);
+            return dbSet.Where(where).FirstOrDefault();
         }
 
         public virtual async Task<T> GetAsync(Expression<Func<T, bool>> where)
         {
-            return await dbSet.FindAsync(where);
+            return await dbSet.Where(where).FirstOrDefaultAsync();
+        }
+
+        public virtual IQueryable<T> Query(Expression<Func<T, bool>> where)
+        {
+            return dbSet.Where(where).AsQueryable();
+        }
+
+        public virtual IQueryable<T> Query()
+        {
+            return dbSet.AsQueryable();
         }
     }
 }

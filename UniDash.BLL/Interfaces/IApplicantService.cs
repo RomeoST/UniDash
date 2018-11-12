@@ -14,10 +14,10 @@ namespace UniDash.BLL.Interfaces
     {
         Task<OperationDetails> CreateApplicant(Applicant app);
         Task<OperationDetails> EditApplicant(Applicant app);
-        Task<OperationDetails> DeleteApplicant(Applicant app);
+        Task<OperationDetails> DeleteApplicant(int id);
 
         Applicant GetApplicantById(int id);
-        IEnumerable<Applicant> GetApplicants();
+        IEnumerable<Applicant> GetApplicants(bool onlyName);
         Task<IEnumerable<Applicant>> GetApplicantsAsync();
 
         IEnumerable<Specialty> GetSpecialties();

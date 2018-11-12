@@ -40,23 +40,35 @@ namespace UniDash.Controllers
             if (!ModelState.IsValid)
                 return new OperationDetails(false, "Помилка валідації даних", ModelState.Values.Select(p => p.Errors.Select(z => z.ErrorMessage)));
 
-            if (model.ApplicantId == 0)
-                return await _applicantService.CreateApplicant(model);
+            if (model.ApplicantId != 0)
+                return await _applicantService.EditApplicant(model);
 
-            return await _applicantService.EditApplicant(model);
+            //model.UserId = User.Identity.Get
+            return await _applicantService.CreateApplicant(model);
+        }
 
+        [Route("remove/{id:int}")]
+        [HttpDelete]
+        public async Task<OperationDetails> RemoveApplicant(int id)
+        {
+            return await _applicantService.DeleteApplicant(id);
         }
 
         [Route("list")]
         [HttpGet]
         public IEnumerable<Applicant> GetList()
         {
-            var a = _applicantService.GetApplicants();
-
-            return a;
+            return _applicantService.GetApplicants(true);
         }
 
-        [Route("Specialties")]
+        [Route("select/{id:int}")]
+        [HttpGet]
+        public Applicant GetApplicant(int id)
+        {
+            return _applicantService.GetApplicantById(id);
+        }
+
+        [Route("specialties")]
         [HttpGet]
         public IEnumerable<Specialty> GetSpecialties()
         {

@@ -1,3 +1,10 @@
+<div class="page-title">
+    <div class="title_left">
+        <h3>Абітурієнти</h3>
+    </div>
+</div>
+<div class="clearfix"></div>
+
 <app-applicant-filter *ngIf="filterShown" [spec]="specialityList"></app-applicant-filter>
 <simple-notifications></simple-notifications>
 <div class="row">
@@ -15,7 +22,9 @@
                     <div class="col-md-12">
                         <div class="col-md-3" style="border-right: 2px dotted #34495E">
                             <a class="btn fa-ico-style" data-toggle="tooltip" data-placement="bottom" (click)="addApplicant()" title="Додати"><i class="fas fa-plus"></i></a>
-                            <a class="btn fa-ico-style" data-toggle="tooltip" data-placement="bottom" (click)="removeApplicant()" title="Видалити"><i class="fas fa-minus"></i></a>
+                            <span data-toggle="modal" data-target="#removeModal">
+                                <a class="btn fa-ico-style" data-toggle="tooltip" data-placement="bottom" title="Видалити"><i class="fas fa-minus"></i></a>
+                            </span>
                         </div>
                         <a href="#" class="btn fa-ico-style" data-toggle="tooltip" data-placement="bottom" title="Експорт"><i class="far fa-file-excel"></i></a>
                         <a id="btn-search" (click)="filterShown = !filterShown" class="btn fa-ico-style" data-toggle="tooltip" data-placement="bottom" title="Пошук"><i class="fas fa-search"></i></a>
@@ -24,7 +33,7 @@
                     <div class="col-md-12">
                         <span class="list-applicant-info"></span>
                         <mat-selection-list #list (selectionChange)="onNgModelChange($event)">
-                            <mat-list-option *ngFor="let item of applicantsList" [selected]="item.selected" [value]="item"  (click)="selectApplicant(item, $event)" [disabled]="!applicantForm.pristine || newApplicantMode" color='primary'>
+                            <mat-list-option *ngFor="let item of applicantsList" [selected]="item.selected" [value]="item"  (click)="getApplicant(item, $event)" [disabled]="!applicantForm.pristine || newApplicantMode" color='primary'>
                                 {{item.applicantId}} - {{item.nameApplicant}}
                             </mat-list-option>
                         </mat-selection-list>
@@ -86,7 +95,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <mat-form-field style="width: 100%">
-                                        <textarea matInput placeholder="Помітки" formControlName="mark"></textarea>
+                                        <textarea matInput placeholder="Помітки" formControlName="markResult"></textarea>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -126,3 +135,25 @@
         </div>
     </div>
 </div>
+
+<!-- Modal remove -->
+<div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Підтвердження</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Ви дійсно бажаєте видалити абітурієнта?
+          <p>Обрано: <span style='color:red'>{{selectedApplicant?.nameApplicant}}</span> </p> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Відміна</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)='removeApplicant()'>Видалити</button>
+        </div>
+      </div>
+    </div>
+  </div>

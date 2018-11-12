@@ -6,7 +6,7 @@ import { ApplicantTableComponent } from './applicant-table/applicant-table.compo
 import { ApplicantEditComponent } from './applicant-edit/applicant-edit.component';
 import { ApplicantFilterComponent } from './applicant-filter/applicant-filter.component';
 import { ApplicantsRoutingModule } from './applicants-routing.module';
-import { GlobalSharedModule } from '../../shared/global-shared.module';
+import { GlobalSharedModule } from '../../../shared/global-shared.module';
 import { ApplicantManagerService } from './shared/applicant-manager.service';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 

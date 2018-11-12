@@ -7,7 +7,7 @@ export interface IApplicantModel{
     address : string,
     speciality : string,
     specialityList : number[],
-    mark : string,
+    markResult : string,
     nameFound : string,
     nameAdded : string,
     dateEdit : string,
@@ -23,7 +23,7 @@ export class ApplicantModel implements IApplicantModel{
     address: string;
     speciality: string;
     specialityList: number[];
-    mark: string;
+    markResult: string;
     nameFound: string;
     nameAdded: string;
     dateEdit: string;
@@ -39,7 +39,7 @@ export class ApplicantModel implements IApplicantModel{
         this.address = '';
         this.speciality = '';
         this.specialityList = [];
-        this.mark = '';
+        this.markResult = '';
         this.nameFound = '';
         this.nameAdded = '';
         this.dateEdit = '';

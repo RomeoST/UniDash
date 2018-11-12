@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UniDash.BLL.Infrastructure;
 using UniDash.BLL.Interfaces;
@@ -67,7 +68,13 @@ namespace UniDash.BLL.Services
                 //TODO: Дописать проверки на корректность вводимых данных
                 var result = _applicantRepository.GetById(app.ApplicantId);
                 if (result == null)
-                    return new OperationDetails(false, "Помилка при додавані, повторіть спробу пізніше", "");
+                    return new OperationDetails(false, "Помилка", new []{ "Помилка при додаванні, повторіть спробу пізніше" });
+
+                var checkApp = await _applicantRepository.GetAsync(p => p.ApplicantId != app.ApplicantId && (p.PhoneApplicant == app.PhoneApplicant ||
+                                                                   (p.MailApplicant == app.MailApplicant && !string.IsNullOrEmpty(app.MailApplicant)) ||
+                                                                   p.NameApplicant == app.NameApplicant));
+                if (checkApp != null)
+                    return new OperationDetails(false, "Такий абітурієнт вже існує", new[] {$"Id - {checkApp.ApplicantId}"});
 
                 result.NameApplicant = app.NameApplicant;
                 result.Address = app.Address;
@@ -81,7 +88,7 @@ namespace UniDash.BLL.Services
 
                 await SaveApplicant();
 
-                return new OperationDetails(true, "Абітурієнт збережений!", "");
+                return new OperationDetails(true, "Абітурієнт збережений!", new { applicantName = app.NameApplicant });
             }
             catch (Exception e)
             {
@@ -94,22 +101,31 @@ namespace UniDash.BLL.Services
         /// <summary>
         /// Видалення абітурієнта
         /// </summary>
-        /// <param name="app">Дані про абітурієнта, перевірка по id</param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<OperationDetails> DeleteApplicant(Applicant app)
+        public async Task<OperationDetails> DeleteApplicant(int id)
         {
-            var result = _applicantRepository.GetById(app.ApplicantId);
+            var result = _applicantRepository.GetById(id);
             if(result == null)
-                return new OperationDetails(false, "Помилка при видалені, повторіть спробу пізніше", "");
+                return new OperationDetails(false, "Помилка", new []{ "Помилка при видалені, повторіть спробу пізніше" });
 
-            _applicantRepository.Delete(app);
-            await SaveApplicant();
-            return new OperationDetails(true, "Абітурієнт видалений", "");
+            _applicantRepository.Delete(result);
+
+            return await SaveApplicant() == 0 ? 
+                new OperationDetails(false, "Помилка", new[] { "Помилка при видалені, повторіть спробу пізніше" }) :
+                new OperationDetails(true, "Абітурієнт видалений", "");
         }
 
         public Applicant GetApplicantById(int id) => _applicantRepository.GetById(id);
 
-        public IEnumerable<Applicant> GetApplicants() => _applicantRepository.GetAll();
+        public IEnumerable<Applicant> GetApplicants(bool onlyName)
+        {
+            if(!onlyName)
+                return _applicantRepository.GetAll();
+
+            return _applicantRepository.Query().Select(p => new Applicant
+                {ApplicantId = p.ApplicantId, NameApplicant = p.NameApplicant});
+        } 
         public async Task<IEnumerable<Applicant>> GetApplicantsAsync() => await _applicantRepository.GetAllAsync();
 
         public IEnumerable<Specialty> GetSpecialties()

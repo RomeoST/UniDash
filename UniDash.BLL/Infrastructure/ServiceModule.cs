@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using UniDash.BLL.Infrastructure.Mapping;
 using UniDash.DAL.Infrastructure;
 using UniDash.DAL.Repositories;
-using Ninject.Web.Common;
 using UniDash.BLL.Interfaces;
 using UniDash.BLL.Services;
 using UniDash.DAL.EF;
@@ -16,6 +17,15 @@ namespace UniDash.BLL.Infrastructure
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services, string connectionString)
         {
+            // AutoMapper
+            services.AddAutoMapper();
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<DomainToViewMappingProfile>();
+                cfg.AddProfile<ViewToDomainMappingProfile>();
+            });
+
+            // DataBase and Identity
             services.AddDbContext<DutContext>(p => p.UseSqlServer(connectionString));
             services.AddScoped<IDataBaseFactory, DataBaseFactory>(provider => new DataBaseFactory(connectionString));
             services.AddTransient<IUnitOfWork, IdentityUnitWork>();
@@ -29,6 +39,7 @@ namespace UniDash.BLL.Infrastructure
                 .AddEntityFrameworkStores<DutContext>()
                 .AddDefaultTokenProviders();
 
+            // Repository
             services.AddTransient<IUserDetailsRepository, UserDetailsRepository>();
             services.AddTransient<IPermissionRepository, PermissionRepository>();
             services.AddTransient<IApplicantRepository, ApplicantRepository>();
@@ -39,6 +50,7 @@ namespace UniDash.BLL.Infrastructure
             services.AddTransient<IUStructureRepository<Department>, UStructureRepository<Department>>();
             services.AddTransient<IUStructureRepository<Specialty>, UStructureRepository<Specialty>>();
 
+            // Service
             services.AddTransient<IApplicantService, ApplicantService>();
             services.AddTransient<IUserService, UserService>();
 

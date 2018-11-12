@@ -22,5 +22,7 @@ namespace UniDash.DAL.Infrastructure
         Task<IEnumerable<T>> GetAllAsync();
         IEnumerable<T> GetMany(Expression<Func<T, bool>> where);
         Task<IEnumerable<T>> GetManyAsync(Expression<Func<T, bool>> where);
+        IQueryable<T> Query(Expression<Func<T, bool>>where);
+        IQueryable<T> Query();
     }
 }

@@ -5,6 +5,7 @@
     <TypeScriptCompiledBlocked>true</TypeScriptCompiledBlocked>
     <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
     <LangVersion>7.1</LangVersion>
+    <UserSecretsId>1df421d7-923c-4587-9ce7-d09355e49f46</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

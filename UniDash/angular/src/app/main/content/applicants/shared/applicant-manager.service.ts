@@ -20,6 +20,10 @@ export class ApplicantManagerService {
     return this._http.get<IApplicantModel[]>('api/applicant/list');
   }
 
+  getApplicant(id){
+    return this._http.get<IApplicantModel>(`api/applicant/select/${id}`);
+  }
+
   getApplicantTable(){
 
   }
@@ -29,10 +33,7 @@ export class ApplicantManagerService {
   }
 
   removeApplicant(model : IApplicantModel){
-    var idx = this.testList.indexOf(model,0);
-    if(idx > -1){
-      this.testList.splice(idx,1);
-    }
+    return this._http.delete(`api/applicant/remove/${model.applicantId}`);
   }
 
   saveApplicant(model : IApplicantModel){

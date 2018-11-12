@@ -1,13 +1,16 @@
-<div class="container-fluid body">
-    <div class="main_container">
-        <app-left-menu></app-left-menu>
-        <app-top-menu></app-top-menu>
-        <app-right-content></app-right-content>
-        <footer>
-            <div class="float-right">
-                Gentelella - by <a href="https://colorlib.com">Colorlib</a> | edited Roman Kolesnyk | 2018
-            </div>
-            <div class="clearfix"></div>
-        </footer>
+<div [class.nav-md]='isAuth'>
+    <div class="container-fluid body">
+        <div class="main_container">
+            <app-left-menu *ngIf = 'isAuth'></app-left-menu>
+            <app-top-menu *ngIf = 'isAuth'></app-top-menu>
+            <app-right-content></app-right-content>
+            <footer *ngIf = 'isAuth'>
+                <div class="float-right">
+                    Gentelella - by <a href="https://colorlib.com">Colorlib</a> | edited Roman Kolesnyk | 2018
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+        </div>
     </div>
 </div>
+

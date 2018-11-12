@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild, Output } from '@angular/core';
 import { IApplicantModel, ApplicantModel } from '../shared/ApplicantModel';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApplicantManagerService } from '../shared/applicant-manager.service';
@@ -21,6 +21,7 @@ export class ApplicantEditComponent implements OnInit {
 
   @ViewChild('list') listElements : MatSelectionList;
   selectedApplicant : IApplicantModel;
+  serverApplicant : IApplicantModel;
 
   filterShown = false; // для отображения панели поиска
   multiSelect = false;
@@ -36,7 +37,7 @@ export class ApplicantEditComponent implements OnInit {
       "mailApplicant" : [{value:"", disabled : true}, Validators.email],
       "speciality" : [{value:""}],
       "specialityList" : [{value:"", disabled : true}, Validators.required],
-      "mark" : [{value:"", disabled: true}],
+      "markResult" : [{value:"", disabled: true}],
       "nameFound" :[{value:"", disabled: true}, Validators.required],
       "nameAdded" : [{value:"", disabled: true}],
       "dateEdit" :[{value:"", disabled: true}],
@@ -48,9 +49,7 @@ export class ApplicantEditComponent implements OnInit {
   ngOnInit() {
     this.applicantManager.getApplicantList().subscribe((p : IApplicantModel[]) => {
       for(let i = 0; i < p.length; i++){
-        var dig = p[i].speciality.split(' ');
         this.applicantsList[i] = {...p[i]};
-        this.applicantsList[i].specialityList = dig.map(Number);
       }
     });
     this.applicantManager.getSpecialityList().subscribe((p : SpecialityModel[]) =>{
@@ -60,9 +59,23 @@ export class ApplicantEditComponent implements OnInit {
     });
   }
 
-  selectApplicant(applicant : ApplicantModel, event : MouseEvent){
+  getApplicant(applicant : ApplicantModel, event : MouseEvent){
     if(!this.applicantForm.pristine || this.newApplicantMode) return;
-    
+    this.applicantForm.disable();
+    this.applicantManager.getApplicant(applicant.applicantId).subscribe((p : IApplicantModel) => {
+      this.serverApplicant = p;
+      this.serverApplicant.specialityList = p.speciality.split(' ').map(Number); // convert speciality '2 3 4' to [2,3,4]
+      this.selectApplicant(this.serverApplicant);
+      this.multiSelect = event == null ? false : event.ctrlKey;
+
+      if(this.multiSelect){
+        let t = { timeOut: 5000,showProgressBar: true, pauseOnHover: true, clickToClose: true, animate: 'fromRight'};
+        this._notifications.warn('Увага', 'Multiselect у розробці', t);
+      }
+    })
+  }
+
+  selectApplicant(applicant : ApplicantModel){
     for(var key in applicant){
       if(this.applicantForm.controls[key] !== undefined){
         this.applicantForm.controls[key].setValue(applicant[key]);
@@ -76,16 +89,15 @@ export class ApplicantEditComponent implements OnInit {
         this.applicantForm.controls[key].enable();
       }
     }
-    this.multiSelect = event == null ? false : event.ctrlKey;
   }
 
   // event when you clicked on the list
   onNgModelChange(event : MatSelectionListChange) {
     this.selectedApplicant = event.option.value;
-     if(!this.multiSelect){
+     //if(!this.multiSelect){
       event.source.deselectAll();
       event.option._setSelected(true); 
-    }     
+    //}     
 }
 
 submit(event){
@@ -114,20 +126,31 @@ saveApplicant(){
     {
       let respApplicant = p.object.applicant as ApplicantModel;
       this.applicantsList[0] = {...respApplicant, selected : true};
+      this.selectedApplicant = this.applicantsList[0];
       this.applicantForm.patchValue({applicantId : respApplicant.applicantId, dateAdd : respApplicant.dateAdd, dateEdit : respApplicant.dateEdit});
     }
+    if(p.object.hasOwnProperty('applicantName')){
+      this.selectedApplicant.nameApplicant = p.object.applicantName;
+    }
 
-    this._notifications.success("Інформація", "Абітурієнт збережений");
+    this._notifications.success("Інформація", "Абітурієнт збережений",t);
     this.applicantForm.markAsPristine();
     this.newApplicantMode = false;
   });
 }
 
 cancelApplicant(){
-  this.applicantsList.shift();
   this.applicantForm.markAsPristine();
-  this.applicantForm.disable();
-  this.newApplicantMode = false;
+
+  if(this.newApplicantMode)
+  {
+    this.applicantsList.shift();
+    this.applicantForm.disable();
+    this.newApplicantMode = false;
+  }
+  else{
+    this.selectApplicant(this.serverApplicant);
+  }
 }
 
 addApplicant(){
@@ -144,21 +167,36 @@ addApplicant(){
   let newApplicant = ApplicantModel.newApplicant();
   this.applicantsList.unshift(newApplicant);
 
-  this.selectApplicant(newApplicant, null);
+  this.selectApplicant(newApplicant);
   this.newApplicantMode = true;
 }
 
 removeApplicant(){
+  let t = {
+    timeOut: 5000,showProgressBar: true,pauseOnHover: true,  clickToClose: true, animate: 'fromBottom'
+  }
   if(this.selectedApplicant == null){
-    let t = {
-      timeOut: 5000,showProgressBar: true,pauseOnHover: true,  clickToClose: true, animate: 'fromBottom'
-    }
     this._notifications.warn("Увага", "Елемент для видалення не обрано!", t);
     return;
   }
-  this.applicantManager.removeApplicant(this.selectedApplicant);
-  this.applicantForm.disable();
-  this.applicantForm.reset();
+
+  this.applicantManager.removeApplicant(this.selectedApplicant).subscribe((p : OperationDetails) => {
+    if(!p.success){
+      this._notifications.error(p.message, p.object.join('\n') ,t);
+      return;
+    }
+
+    this._notifications.success('Інформація', 'Абітурієнт видалений', t);
+    var idx = this.applicantsList.indexOf(this.selectedApplicant, 0);
+    if(idx > -1){
+      this.applicantsList.splice(idx,1);
+    }
+    this.serverApplicant = null;
+    this.selectedApplicant = null;
+    this.applicantForm.disable();
+    this.applicantForm.reset();
+    
+  });
 }
 
 }
