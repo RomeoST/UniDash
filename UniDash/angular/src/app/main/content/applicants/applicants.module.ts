@@ -9,6 +9,10 @@ import { ApplicantsRoutingModule } from './applicants-routing.module';
 import { GlobalSharedModule } from '../../../shared/global-shared.module';
 import { ApplicantManagerService } from './shared/applicant-manager.service';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from 'src/app/_helpers/jwt.interceptor';
+import { ErrorInterceptor } from 'src/app/_helpers/error.interceptor';
+import { NotificationsRSTService } from 'src/app/shared/notifications-rst.service';
 
 @NgModule({
   imports: [
@@ -20,6 +24,11 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     ApplicantTableComponent, 
     ApplicantEditComponent, 
     ApplicantFilterComponent ],
-    providers: [ApplicantManagerService]
+    providers: [
+      ApplicantManagerService,
+      NotificationsRSTService,
+      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    ]
 })
 export class ApplicantsModule { }

@@ -42,7 +42,7 @@ namespace UniDash
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secterKey")),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secterKey123secterKey123")),
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };

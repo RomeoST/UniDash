@@ -41,6 +41,8 @@ namespace UniDash
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .UseUrls("http://localhost:4000")
+                //.UseUrls("https://0.0.0.0:1234")
+                .UseIISIntegration()
                 .Build();
     }
 }

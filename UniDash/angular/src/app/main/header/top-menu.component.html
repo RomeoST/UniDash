@@ -9,7 +9,7 @@
           <ul class="nav navbar-nav navbar-right">
               <li class="">
                   <a href="javascript:;" class="user-profile" data-toggle="dropdown" aria-expanded="false">
-                      <img src="../../assets/images/user.png" alt="" />Roman Kolesnyk
+                      <img src="../../assets/images/user.png" alt="" />{{userName}}
                       <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu float-right">
@@ -21,7 +21,7 @@
                           </a>
                       </li>
                       <li><a href="javascript:;">Допомога</a></li>
-                      <li><a href="/"><i class="fas fa-sign-out-alt float-right"></i> Вийти</a></li>
+                      <li><a (click)="logout()"><i class="fas fa-sign-out-alt float-right"></i> Вийти</a></li>
                   </ul>
               </li>
 

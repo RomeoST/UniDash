@@ -9,8 +9,9 @@ const routes: Routes = [
   { path: "login", component: LoginComponent, pathMatch: "full"},
   { path: '', canActivate: [AuthGuard], children:[
     { path: 'applicants', loadChildren: () => ApplicantsModule  },
-    { path: '', loadChildren: () => NewsModule },
-    { path: '**', loadChildren: () => NewsModule }
+    { path: 'news', loadChildren: () => NewsModule },
+    { path: '', redirectTo: 'news', pathMatch: 'full' },
+    { path: '**', redirectTo: '', pathMatch: 'full' }
   ]}
 ];
 

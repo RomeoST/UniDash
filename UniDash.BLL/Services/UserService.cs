@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using UniDash.BLL.Infrastructure;
 using UniDash.BLL.Interfaces;
@@ -9,6 +10,9 @@ using UniDash.DAL.Infrastructure;
 using UniDash.DAL.Repositories;
 using UniDash.Model.Models;
 using Microsoft.AspNetCore.Identity;
+using UniDash.BLL.DTO;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
 namespace UniDash.BLL.Services
 {
@@ -19,15 +23,18 @@ namespace UniDash.BLL.Services
         private IPermissionRepository _permissionRepository { get;}
         private UserManager<DutUser> _userManager { get;}
         private RoleManager<DutRole> _roleManager { get;}
+        private SignInManager<DutUser> _signInManager { get; }
 
         public UserService(IUnitOfWork dataBase, IUserDetailsRepository userDetailsRepository,
-            IPermissionRepository permissionRepository, UserManager<DutUser> userManager, RoleManager<DutRole> roleManager)
+            IPermissionRepository permissionRepository, UserManager<DutUser> userManager, RoleManager<DutRole> roleManager,
+            SignInManager<DutUser> signInManager)
         {
             _dataBase = dataBase;
             _userDetailsRepository = userDetailsRepository;
             _permissionRepository = permissionRepository;
             _userManager = userManager;
             _roleManager = roleManager;
+            _signInManager = signInManager;
         }
 
         public async Task<OperationDetails> Create(DutUser userDto, string password)
@@ -51,22 +58,36 @@ namespace UniDash.BLL.Services
 
         }
 
-        public ClaimsIdentity Authenticate(string login, string password)
+        public async Task<OperationDetails> Authenticate(LoginDTO userDto)
         {
-            var user = _userManager.Users.SingleOrDefault(p => p.UserName == login);
+            var user = await _userManager.FindByNameAsync(userDto.UserName);
 
             if (user == null)
-                return null;
+                return new OperationDetails(false, "Логін або пароль не вірні");
 
-            if (!VerifyPasswordHash(password, user.PasswordHash, user.UserDetails.PasswordSalt))
-                return null;
+            var result = await _signInManager.CheckPasswordSignInAsync(user, userDto.Password, false);
+            if(!result.Succeeded)
+                return new OperationDetails(false, "Логін або пароль не вірні");
 
-            var claims = new List<Claim>
+            // TODO: допилить роли для jwt
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("secterKey123secterKey123");
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, login)
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id),
+                    new Claim(ClaimTypes.Role, roles.FirstOrDefault()),
+                }),
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
 
-            return new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            return new OperationDetails(true, "", new { user = new {UserName = user.UserName}, token = tokenString});
         }
 
         public async Task<DutUser> FindByName(string name)
@@ -135,37 +156,6 @@ namespace UniDash.BLL.Services
         public async Task SaveUser()
         {
             await _dataBase.CommitAsync();
-        }
-
-        private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-            if (password == null) throw new ArgumentNullException("password");
-            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
-
-            using (var hmac = new System.Security.Cryptography.HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            }
-        }
-
-        private static bool VerifyPasswordHash(string password, string storedHash, string storedSalt)
-        {
-            if (password == null) throw new ArgumentNullException("password");
-            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
-            if (storedHash.Length != 64) throw new ArgumentException("Invalid length of password hash (64 bytes expected).", "passwordHash");
-            if (storedSalt.Length != 128) throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "passwordHash");
-
-            using (var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt.Select(p => Convert.ToByte(p)).ToArray()))
-            {
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                for (int i = 0; i < computedHash.Length; i++)
-                {
-                    if (computedHash[i] != storedHash[i]) return false;
-                }
-            }
-
-            return true;
         }
     }
 }

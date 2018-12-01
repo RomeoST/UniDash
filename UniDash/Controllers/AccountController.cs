@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using UniDash.BLL.DTO;
+using UniDash.BLL.Infrastructure;
 using UniDash.BLL.Interfaces;
 using UniDash.Model.Models;
 
@@ -30,24 +31,20 @@ namespace UniDash.Controllers
         [Route("login")]
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Authenticate([FromBody] LoginDTO user)
+        public async Task<OperationDetails> Authenticate([FromBody] LoginDTO user)
         {
             if (!ModelState.IsValid)
-                return Ok();
+                return new OperationDetails(false, "Не всі поля заповнені");           
 
-            var mapUser = Mapper.Map<LoginDTO, DutUser>(user);
-
-            //_userService.Authenticate()
-
-            return Ok();
+            return await _userService.Authenticate(user);
         }
 
-        public async Task<IActionResult> Register([FromBody] RegisterDTO user)
+        /*public async Task<IActionResult> Register([FromBody] RegisterDTO user)
         {
             if (!ModelState.IsValid)
                 return Ok();
 
             return Ok();
-        }
+        }*/
     }
 }

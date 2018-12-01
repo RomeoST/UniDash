@@ -15,7 +15,7 @@ using UniDash.Model.Models.StructUniversity;
 
 namespace UniDash.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Produces("application/json")]
     [Route("api/Applicant")]
     public class ApplicantController : Controller

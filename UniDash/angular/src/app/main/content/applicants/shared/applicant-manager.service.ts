@@ -8,12 +8,6 @@ import { SpecialityModel } from 'src/app/shared/models/specialityModel';
   providedIn: 'root'
 })
 export class ApplicantManagerService {
-
-  private testList : IApplicantModel[] =[
-    /*new ApplicantModel('1',"test1","ahe@gmail.com","669966506","DUT","Kyiv",[1],"","Test2","Test3","10.10.2018 18:20","10.10.2018 18:20"),
-    new ApplicantModel('2',"test1","ahe@gmail.com","669966506","DUT","Kyiv",[2],"","Test2","Test3","10.10.2018 18:20","10.10.2018 18:20")*/
-  ];
-
   constructor(private _http : HttpClient){}
 
   getApplicantList() {
@@ -21,7 +15,9 @@ export class ApplicantManagerService {
   }
 
   getApplicant(id){
-    return this._http.get<IApplicantModel>(`api/applicant/select/${id}`);
+    return this._http.get<IApplicantModel>(`api/applicant/select/${id}`).pipe(map(result =>{
+      return result;
+    }));
   }
 
   getApplicantTable(){

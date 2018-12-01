@@ -4,8 +4,9 @@ import { ApplicantEditComponent } from './applicant-edit/applicant-edit.componen
 import { ApplicantTableComponent } from './applicant-table/applicant-table.component';
 
 const routes: Routes = [
-  { path: "applicants/edit", component: ApplicantEditComponent },
-  { path: "applicants", component: ApplicantTableComponent }
+  { path: 'edit', component: ApplicantEditComponent },
+  { path: '', component: ApplicantTableComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({

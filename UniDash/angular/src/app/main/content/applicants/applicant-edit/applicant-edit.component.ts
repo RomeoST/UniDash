@@ -27,7 +27,7 @@ export class ApplicantEditComponent implements OnInit {
   multiSelect = false;
   newApplicantMode = false;
 
-  constructor(formBuilder : FormBuilder, applicantManager : ApplicantManagerService, private _notifications: NotificationsService) {
+  constructor(formBuilder: FormBuilder, applicantManager: ApplicantManagerService, private _notifications: NotificationsService) {
     this.applicantForm = formBuilder.group({
       "applicantId" : [{value:"", disabled:true}],
       "nameApplicant" : [{value:"", disabled : true}, Validators.required],
@@ -62,22 +62,22 @@ export class ApplicantEditComponent implements OnInit {
   getApplicant(applicant : ApplicantModel, event : MouseEvent){
     if(!this.applicantForm.pristine || this.newApplicantMode) return;
     this.applicantForm.disable();
-    this.applicantManager.getApplicant(applicant.applicantId).subscribe((p : IApplicantModel) => {
+    this.applicantManager.getApplicant(applicant.applicantId).subscribe((p: IApplicantModel) => {
       this.serverApplicant = p;
       this.serverApplicant.specialityList = p.speciality.split(' ').map(Number); // convert speciality '2 3 4' to [2,3,4]
       this.selectApplicant(this.serverApplicant);
       this.multiSelect = event == null ? false : event.ctrlKey;
 
-      if(this.multiSelect){
-        let t = { timeOut: 5000,showProgressBar: true, pauseOnHover: true, clickToClose: true, animate: 'fromRight'};
+      if (this.multiSelect) {
+        const t = { timeOut: 5000,showProgressBar: true, pauseOnHover: true, clickToClose: true, animate: 'fromRight'};
         this._notifications.warn('Увага', 'Multiselect у розробці', t);
       }
     })
   }
 
-  selectApplicant(applicant : ApplicantModel){
-    for(var key in applicant){
-      if(this.applicantForm.controls[key] !== undefined){
+  selectApplicant(applicant: ApplicantModel) {
+    for (const key in applicant) {
+      if (this.applicantForm.controls[key] !== undefined) {
         this.applicantForm.controls[key].setValue(applicant[key]);
         switch (key) {
           case "applicantId":
@@ -92,7 +92,7 @@ export class ApplicantEditComponent implements OnInit {
   }
 
   // event when you clicked on the list
-  onNgModelChange(event : MatSelectionListChange) {
+  onNgModelChange(event: MatSelectionListChange) {
     this.selectedApplicant = event.option.value;
      //if(!this.multiSelect){
       event.source.deselectAll();

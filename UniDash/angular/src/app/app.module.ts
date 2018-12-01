@@ -9,13 +9,16 @@ import { TopMenuComponent } from './main/header/top-menu.component';
 import { RightContentComponent } from './main/content/right-content.component';
 import { ListMenuComponent } from './main/menu/list-menu/list-menu.component';
 import { FooterMenuComponent } from './main/menu/footer-menu/footer-menu.component';
-import { ApplicantsModule } from './main/content/applicants/applicants.module';
 import { AppRoutingModule } from './app-routing.module';
 import { GlobalSharedModule } from './shared/global-shared.module';
-import { NewsModule } from './main/content/news/news.module';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './_guard/auth.guard';
 import { AuthenticationService } from './shared/authentication.service';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { NotificationsRSTService } from './shared/notifications-rst.service';
 
 @NgModule({
   declarations: [
@@ -31,12 +34,15 @@ import { AuthenticationService } from './shared/authentication.service';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ApplicantsModule,
-    GlobalSharedModule
+    GlobalSharedModule,
+    SimpleNotificationsModule.forRoot()
   ],
   providers: [
     AuthGuard,
-    AuthenticationService
+    AuthenticationService,
+    NotificationsRSTService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

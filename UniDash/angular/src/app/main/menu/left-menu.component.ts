@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeftMenuComponent implements OnInit {
 
+  userName: string;
+  
   constructor() { }
 
   ngOnInit() {
+    this.userName = JSON.parse(localStorage.getItem('currentUser')).user.userName;
   }
 
 }
